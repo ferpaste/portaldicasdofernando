@@ -1,0 +1,152 @@
+/* PORTAL DICAS DO FERNANDO 
+   Estilo: "Pedreiro de Elite" (Dark Industrial)
+   Versão: Final com Trena Corrigida
+*/
+
+/* --- 1. IMPORTAÇÃO DE FONTES --- */
+/* Archivo Black (Títulos Impactantes) e Roboto (Leitura Técnica) */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+/* --- 2. CONFIGURAÇÕES GERAIS --- */
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0f0f0f; /* Preto Profundo */
+    color: #e5e5e5; /* Branco Cimento */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased; /* Texto mais nítido */
+    overflow-x: hidden; /* Evita rolagem lateral indesejada */
+}
+
+/* --- 3. SCROLLBAR PERSONALIZADA (Estilo Ferramenta) --- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111; /* Trilho Escuro */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333; /* Botão Cinza Escuro */
+    border-radius: 5px;
+    border: 2px solid #111;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FF6B00; /* Laranja Fernando ao passar o mouse */
+}
+
+/* --- 4. TEXTURAS E FUNDOS --- */
+
+/* Textura de Concreto Escuro (Gerada via CSS/SVG) */
+.bg-concrete {
+    background-color: #0f0f0f;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23262626' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Fita Zebrada (Caution Tape) Animada */
+.caution-tape {
+    background: repeating-linear-gradient(
+        45deg,
+        #FF6B00,         /* Laranja */
+        #FF6B00 10px,
+        #000 10px,       /* Preto */
+        #000 20px
+    );
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    /* Animação definida abaixo em @keyframes */
+    animation: slideTape 20s linear infinite; 
+    will-change: background-position;
+}
+
+/* --- 5. ELEMENTOS ESPECIAIS DE UI --- */
+
+/* TRENA REALISTA (CORRIGIDA) */
+/* Desenha os riscos da régua sem precisar de imagem */
+.trena-pattern {
+    background-image: 
+        /* Risco Pequeno (mm) - Cinza Escuro */
+        linear-gradient(90deg, #1a1a1a 1px, transparent 1px),
+        /* Risco Médio (meio cm) - Cinza Escuro */
+        linear-gradient(90deg, #1a1a1a 2px, transparent 2px),
+        /* Risco Grande (cm) - Preto Puro */
+        linear-gradient(90deg, #000 2px, transparent 2px);
+    
+    /* Define a altura e a frequência de repetição dos riscos */
+    background-size: 
+        10px 40%,   /* A cada 10px, altura 40% (risco pequeno) */
+        50px 60%,   /* A cada 50px, altura 60% (risco médio) */
+        100px 100%; /* A cada 100px, altura 100% (risco grande) */
+        
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    opacity: 0.7; /* Suavidade para parecer impresso na fita */
+}
+
+/* Glassmorphism (Painéis de Vidro Fosco Industrial) */
+.glass-panel {
+    background: rgba(20, 20, 20, 0.85); /* Preto translúcido mais forte para leitura */
+    backdrop-filter: blur(12px);         /* Desfoque do fundo */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borda sutil */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5); /* Sombra profunda */
+}
+
+/* Texto Outline (Contorno - Usado nos títulos de fundo) */
+.text-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    color: transparent;
+}
+
+/* --- 6. ANIMAÇÕES (KEYFRAMES) --- */
+
+/* Mover a Fita Zebrada */
+@keyframes slideTape {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 0; }
+}
+
+/* Entrada Suave (Fade In Up) */
+@keyframes fadeInUp {
+    0% { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Efeito de Pulso Lento (Para ícones de destaque) */
+@keyframes pulseSlow {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+/* Classes Utilitárias de Animação */
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* --- 7. AJUSTES RESPONSIVOS (MOBILE) --- */
+@media (max-width: 768px) {
+    /* Ajuste de tamanho de fonte para leitura confortável no telemóvel */
+    p { 
+        font-size: 1rem; 
+    }
+    
+    /* Garante que o painel de vidro não fique colado nas bordas em telas pequenas */
+    .glass-panel { 
+        padding: 1rem 1.5rem !important; 
+    }
+    
+    /* Ajuste da altura da fita zebrada no mobile */
+    .caution-tape {
+        background-size: 200% 100%; /* Otimiza animação no mobile */
+    }
+}

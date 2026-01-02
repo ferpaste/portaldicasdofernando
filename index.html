@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicas do Fernando | Construindo com Propósito</title>
+    <meta name="description" content="Portal oficial Dicas do Fernando. O maior ecossistema de construção civil do Brasil. Livro, Cursos e Tecnologia para quem constrói sonhos.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style-base.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Archivo Black', 'sans-serif'],
+                    },
+                    colors: {
+                        'ob-orange': '#FF6B00', /* Laranja Segurança */
+                        'ob-dark': '#0f0f0f',   /* Preto Profundo */
+                        'ob-gray': '#1f1f1f',   /* Cinza Concreto */
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'zoom-in': 'zoomIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards', /* Nova Animação Zoom */
+                    },
+                    keyframes: {
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.5)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-concrete font-sans text-white antialiased selection:bg-ob-orange selection:text-black">
+
+    <div id="trena-container" class="fixed top-0 left-0 w-full h-8 z-[100] bg-black/80 backdrop-blur pointer-events-none" style="display: none;">
+        <div id="trena-bar" class="h-6 mt-1 bg-yellow-400 border-b-2 border-yellow-600 shadow-md relative w-0 transition-all duration-75 ease-linear">
+            <div class="trena-pattern absolute inset-0 w-full h-full opacity-60"></div>
+            <div class="absolute right-0 top-0 h-7 w-4 bg-gray-300 border border-gray-400 rounded-b-md shadow-lg z-10 translate-y-[-2px] flex justify-center">
+                <div class="w-1.5 h-1.5 bg-black rounded-full mt-4 opacity-50"></div>
+            </div>
+            <div class="absolute right-0 -bottom-10 transform translate-x-1/2 bg-ob-gray text-white text-xs font-bold px-3 py-1 rounded border border-white/20 shadow-xl">
+                <span id="trena-number" class="text-ob-orange font-mono text-base">0</span>cm
+            </div>
+        </div>
+    </div>
+
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 pt-3 px-2 md:px-4">
+        <div class="glass-panel rounded-xl max-w-7xl mx-auto flex justify-between items-center h-20 px-6 shadow-2xl">
+            
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="bg-ob-orange p-2 rounded-lg transform group-hover:rotate-12 transition-transform shadow-[0_0_15px_rgba(255,107,0,0.5)]">
+                    <i data-lucide="hard-hat" class="w-7 h-7 text-black fill-current"></i>
+                </div>
+                <div class="leading-none">
+                    <span class="block font-display text-lg text-white tracking-tighter">DICAS DO</span>
+                    <span class="block font-display text-2xl text-ob-orange tracking-tighter -mt-1">FERNANDO</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex gap-6 font-bold text-sm tracking-widest uppercase items-center">
+                <a href="#hero" class="hover:text-ob-orange transition-colors">Início</a>
+                <a href="#ecossistema" class="hover:text-ob-orange transition-colors">Ecossistema</a>
+                <a href="livro.html" class="hover:text-ob-orange transition-colors">Livro</a>
+                <a href="#comunidade" class="hover:text-ob-orange transition-colors">Comunidade</a>
+                <a href="#parcerias" class="hover:text-ob-orange transition-colors">Parcerias</a>
+            </nav>
+
+            <button id="menu-btn" class="md:hidden text-white hover:text-ob-orange transition-colors">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center gap-8 text-2xl font-black uppercase text-white backdrop-blur-xl transition-all">
+        <button id="close-menu-btn" class="absolute top-8 right-8 text-ob-orange">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <a href="#hero" class="mobile-link hover:text-ob-orange">Início</a>
+        <a href="#ecossistema" class="mobile-link hover:text-ob-orange">Ecossistema</a>
+        <a href="livro.html" class="mobile-link hover:text-ob-orange">O Livro</a>
+        <a href="#parcerias" class="mobile-link hover:text-ob-orange">Parcerias</a>
+        <a href="fernandoresponde.html" class="mobile-link text-green-400">Fernando Responde (IA)</a>
+    </div>
+
+    <section id="hero" class="relative min-h-[95vh] flex items-center pt-24 pb-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
+            <img src="fernando-obra-bg.jpg" class="w-full h-full object-cover opacity-30 scale-105 animate-[pulse_10s_infinite]" alt="Canteiro de Obras" onerror="this.style.display='none'">
+        </div>
+
+        <div class="relative z-20 max-w-7xl mx-auto px-6 w-full text-center flex flex-col items-center">
+            <div class="max-w-5xl">
+                <div class="inline-flex items-center gap-2 border border-ob-orange/30 bg-ob-orange/10 px-4 py-1.5 rounded-full mb-8 backdrop-blur animate-fade-in-up">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-ob-orange text-xs md:text-sm font-bold uppercase tracking-widest">O Maior Portal da Construção do Brasil 🇧🇷</span>
+                </div>
+
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl leading-none mb-6 text-white drop-shadow-2xl animate-fade-in-up" style="animation-delay: 100ms;">
+                    Dicas do Fernando<br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-ob-orange to-yellow-500">Construindo com Propósito</span>
+                </h1>
+                
+                <div class="mb-8 animate-fade-in-up flex justify-center" style="animation-delay: 200ms;">
+                    <p class="text-xl md:text-2xl text-gray-300 font-light italic border-l-4 border-ob-orange pl-6 py-2 inline-block text-left">
+                        "Um Lar começa no coração, antes mesmo da fundação."
+                    </p>
+                </div>
+
+                <p class="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 300ms;">
+                    Bem-vindo ao maior <strong>ecossistema de construção civil</strong> do Brasil. Aqui, transformamos "Construção" em Propósito, unindo o conhecimento prático ao poder da Tecnologia.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-5 justify-center items-center animate-fade-in-up" style="animation-delay: 400ms;">
+                    <a href="livro.html" class="bg-ob-orange text-black font-black text-lg px-8 py-4 rounded hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,107,0,0.4)] flex items-center justify-center gap-2 group w-full sm:w-auto">
+                        <i data-lucide="hammer" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
+                        LIVRO-FERRAMENTA
+                    </a>
+                    
+                    <a href="fernandoresponde.html" class="border border-white/20 bg-white/5 text-white font-bold text-lg px-8 py-4 rounded hover:bg-white/10 backdrop-blur transition-all flex items-center justify-center gap-2 group w-full sm:w-auto">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-green-400 group-hover:scale-110 transition-transform"></i>
+                        FERNANDO RESPONDE
+                    </a>
+                </div>
+
+                <div class="mt-12 animate-zoom-in opacity-0" style="animation-delay: 600ms;">
+                    <img src="logodf.png" alt="Logo Dicas do Fernando" class="w-40 md:w-56 lg:w-64 h-auto mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-300">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gray-500">
+            <i data-lucide="chevrons-down" class="w-8 h-8"></i>
+        </div>
+    </section>
+
+    <div class="w-full h-8 caution-tape border-y-2 border-black relative z-30"></div>
+
+    <section id="ecossistema" class="py-24 bg-ob-gray border-y border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            
+            <span class="inline-block text-ob-orange font-bold uppercase tracking-widest text-sm mb-2">O Ecossistema</span>
+            <h2 class="font-display text-4xl md:text-6xl mb-6 text-white">
+                Os Pilares do Sucesso
+            </h2>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-16">
+                Tudo o que você precisa para construir, reformar e se profissionalizar em um só lugar.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="group relative bg-ob-dark rounded-xl border border-white/10 overflow-hidden hover:border-ob-orange transition-all duration-300 transform hover:-translate-y-2 z-10 hover:shadow-[0_0_20px_rgba(255,107,0,0.15)] flex flex-col">
+                    <div class="h-64 w-full relative overflow-hidden bg-gray-900 flex-shrink-0">
+                        <div class="absolute inset-0 bg-black/20 z-10 transition-opacity group-hover:opacity-0"></div>
+                        <img src="card-livro.jpg" alt="O Livro Ferramenta" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 text-center flex-grow flex flex-col">
+                        <h3 class="font-display text-2xl text-white mb-2 uppercase">O LIVRO-FERRAMENTA<br><span class="text-lg normal-case text-gray-300">Construindo com Propósito</span></h3>
+                        <p class="text-ob-orange text-xs font-bold uppercase tracking-widest mb-4">O MAIOR GUIA DA CONSTRUÇÃO</p>
+                        <div class="text-gray-400 text-sm mb-6 leading-relaxed flex-grow text-left space-y-3">
+                            <p class="text-center text-white font-medium mb-2">Este não é apenas um livro. É o maior guia de construção já criado para quem realmente põe a mão na massa.</p>
+                            <p class="text-xs">Porque ele foi feito para resolver problemas reais. Cada página foi pensada como uma ferramenta:</p>
+                            <ul class="list-disc pl-4 space-y-1 marker:text-ob-orange">
+                                <li>Explicação clara no papel, para consultar na hora</li>
+                                <li>QR Codes estratégicos que levam direto para vídeos práticos</li>
+                                <li>Planilhas prontas de orçamento e listas exatas de materiais</li>
+                                <li>Soluções organizadas por etapa da construção e reforma</li>
+                            </ul>
+                            <p class="text-center font-bold text-white mt-2">Feito para manter em casa ou levar para a obra. É para sujar de concreto!</p>
+                        </div>
+                        <a href="livro.html" class="block w-full text-center bg-white text-black font-black py-4 rounded uppercase hover:bg-gray-200 transition-colors tracking-wide text-xs md:text-sm mt-auto">
+                            CONHEÇA O LIVRO-FERRAMENTA
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-ob-dark rounded-xl border border-white/10 overflow-hidden hover:border-ob-orange transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,107,0,0.15)] flex flex-col">
+                    <div class="h-64 w-full relative overflow-hidden bg-gray-900 flex-shrink-0">
+                        <div class="absolute inset-0 bg-black/20 z-10 transition-opacity group-hover:opacity-0"></div>
+                        <img src="card-curso.jpg" alt="Curso de Pedreiro" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 text-center flex-grow flex flex-col">
+                        <h3 class="font-display text-2xl text-white mb-2 uppercase">CONSTRUINDO CONSTRUTORES</h3>
+                        <p class="text-white/80 text-xs font-bold uppercase tracking-widest mb-4">O caminho completo da construção<br>Do Zero ao Profissional</p>
+                        <div class="text-gray-400 text-sm mb-6 leading-relaxed flex-grow text-left space-y-3">
+                            <p class="text-center text-white font-medium mb-2">Para quem nunca pegou numa colher de pedreiro e também para quem já trabalha na área.</p>
+                            <ul class="list-disc pl-4 space-y-1 marker:text-ob-orange">
+                                <li>Fundamentos do zero: perca o medo de começar</li>
+                                <li>Técnicas profissionais do dia a dia da obra</li>
+                                <li>Métodos para evitar erros, retrabalho e desperdício</li>
+                                <li>Organização, medidas, nível, prumo e acabamento</li>
+                                <li>Visão profissional para cobrar melhor e ser respeitado</li>
+                            </ul>
+                            <p class="text-center font-bold text-white mt-2">Confiança para executar, segurança para fazer e conhecimento para crescer.</p>
+                        </div>
+                        <a href="https://www.youtube.com/@DicasdoFernando/playlists" target="_blank" class="block w-full text-center bg-ob-orange text-black font-black py-4 rounded uppercase hover:bg-white transition-colors tracking-wide text-xs md:text-sm mt-auto">
+                            ACESSAR O Curso de Pedreiro
+                        </a>
+                    </div>
+                </div>
+
+                <div class="group relative bg-ob-dark rounded-xl border border-white/10 overflow-hidden hover:border-green-500 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] flex flex-col">
+                    <div class="h-64 w-full relative overflow-hidden bg-gray-900 flex-shrink-0">
+                        <div class="absolute inset-0 bg-black/20 z-10 transition-opacity group-hover:opacity-0"></div>
+                        <img src="card-ia.jpg" alt="Fernando Responde IA" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-8 text-center flex-grow flex flex-col">
+                        <h3 class="font-display text-2xl text-white mb-2 uppercase">FERNANDO RESPONDE</h3>
+                        <p class="text-green-500 text-xs font-bold uppercase tracking-widest mb-4">Seu Mestre de Obras 24h</p>
+                        <div class="text-gray-400 text-sm mb-6 leading-relaxed flex-grow text-left space-y-3">
+                            <p class="text-center text-white font-medium mb-2">CONVERSE COM VOZ E O MESTRE RESPONDE. Não é só tecnologia, é uma ferramenta prática.</p>
+                            <p class="text-xs">Você fala como falaria no canteiro. O Mestre escuta, entende e responde sem adivinhação.</p>
+                            <ul class="list-disc pl-4 space-y-1 marker:text-green-500">
+                                <li>Tira dúvidas passo a passo, em linguagem simples</li>
+                                <li>Calcula materiais para você não desperdiçar dinheiro</li>
+                                <li>Mostra imagens e listas de exemplo</li>
+                                <li>Entrega dicas reais de reforma e construção</li>
+                            </ul>
+                            <p class="text-center font-bold text-white mt-2">Sem resposta genérica. Treinada com o conhecimento Dicas do Fernando.</p>
+                        </div>
+                        <a href="fernandoresponde.html" class="block w-full text-center bg-green-600 text-white font-black py-4 rounded uppercase hover:bg-green-500 transition-colors tracking-wide text-xs md:text-sm shadow-lg shadow-green-900/30 mt-auto">
+                            PERGUNTE AGORA
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="comunidade" class="py-24 bg-ob-dark border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-ob-orange/5 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <span class="inline-block text-ob-orange font-bold uppercase tracking-widest text-sm mb-2">A Comunidade</span>
+
+            <h2 class="font-display text-3xl md:text-5xl text-white mb-6">
+                A Maior Sala de Aula de Construção do Brasil
+            </h2>
+
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-16 leading-relaxed">
+                Não estamos apenas na internet, estamos em milhares de lares e canteiros de obra espalhados pelo mundo a fora.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                <div class="p-6 border border-white/10 rounded-xl bg-white/5 hover:border-ob-orange transition-colors group text-center">
+                    <i data-lucide="eye" class="w-8 h-8 text-ob-orange mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-display text-4xl text-white mb-1">+112M</h3>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Visualizações</p>
+                </div>
+                <div class="p-6 border border-white/10 rounded-xl bg-white/5 hover:border-ob-orange transition-colors group text-center">
+                    <i data-lucide="users" class="w-8 h-8 text-ob-orange mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-display text-4xl text-white mb-1">+630K</h3>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Inscritos</p>
+                </div>
+                <div class="p-6 border border-white/10 rounded-xl bg-white/5 hover:border-ob-orange transition-colors group text-center">
+                    <i data-lucide="globe" class="w-8 h-8 text-ob-orange mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-display text-4xl text-white mb-1">+30M</h3>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Alcance Mensal</p>
+                </div>
+                <div class="p-6 border border-white/10 rounded-xl bg-white/5 hover:border-ob-orange transition-colors group text-center">
+                    <i data-lucide="heart" class="w-8 h-8 text-ob-orange mx-auto mb-4 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-display text-4xl text-white mb-1">+680K</h3>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Seguidores</p>
+                </div>
+            </div>
+
+            <div>
+                <p class="text-sm font-bold text-white uppercase tracking-widest mb-6">acesse nossas redes:</p>
+                <div class="flex justify-center gap-6">
+                    <a href="https://youtube.com/@DicasdoFernando" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-full text-white hover:bg-red-600 hover:border-red-600 transition-all hover:-translate-y-1 group">
+                        <i data-lucide="youtube" class="w-6 h-6"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-full text-white hover:bg-pink-600 hover:border-pink-600 transition-all hover:-translate-y-1 group">
+                        <i data-lucide="instagram" class="w-6 h-6"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="p-4 bg-white/5 border border-white/10 rounded-full text-white hover:bg-blue-600 hover:border-blue-600 transition-all hover:-translate-y-1 group">
+                        <i data-lucide="facebook" class="w-6 h-6"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="parcerias" class="py-24 bg-black border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <span class="inline-block text-ob-orange font-bold uppercase tracking-widest text-sm mb-4 border border-ob-orange/30 px-3 py-1 rounded">
+                Anuncie com a gente
+            </span>
+
+            <h2 class="font-display text-3xl md:text-5xl text-white mb-8 leading-tight">
+                CADA PARCERIA É UMA OBRA FEITA COM<br/>
+                <span class="text-ob-orange">CAPRICHO E DEDICAÇÃO.</span>
+            </h2>
+
+            <p class="text-gray-400 font-bold uppercase tracking-widest mb-10 text-sm">Grandes marcas constroem conosco:</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 items-center mb-16 opacity-80">
+                <span class="text-2xl md:text-4xl font-black text-gray-500 hover:text-white transition-colors cursor-default tracking-tighter">CASSOL</span>
+                <span class="text-2xl md:text-4xl font-black text-gray-500 hover:text-white transition-colors cursor-default tracking-tighter">GetNinjas</span>
+                <span class="text-2xl md:text-4xl font-black text-gray-500 hover:text-white transition-colors cursor-default tracking-tighter">Votorantim</span>
+                <span class="text-2xl md:text-4xl font-black text-gray-500 hover:text-white transition-colors cursor-default tracking-tighter">IRWIN</span>
+                <span class="text-xs font-bold text-ob-orange border border-ob-orange/50 px-3 py-1 rounded-full uppercase">Entre Outras</span>
+            </div>
+
+            <div class="bg-ob-gray/30 border border-white/10 p-8 md:p-12 rounded-2xl max-w-4xl mx-auto backdrop-blur-sm">
+                <p class="text-xl md:text-3xl text-white font-bold mb-4 leading-tight">
+                    Conecte A SUA MARCA ao maior movimento de construção civil do país.
+                </p>
+                <p class="text-gray-400 mb-8 font-mono text-sm uppercase tracking-wide">
+                    PÚBLICO QUALIFICADO • ALTO ENGAJAMENTO • CREDIBILIDADE
+                </p>
+                <p class="text-sm text-gray-500 mb-8">
+                    CONHEÇA TUDO SOBRE NOSSO TRABALHO DE PARCERIAS ACESSE O MÍDIA KIT:
+                </p>
+
+                <a href="midiakit.html" class="inline-flex items-center gap-2 bg-white text-black font-black text-sm md:text-base px-8 py-4 rounded hover:bg-ob-orange transition-all transform hover:-translate-y-1 shadow-lg uppercase tracking-wide">
+                    <i data-lucide="file-bar-chart-2" class="w-5 h-5"></i>
+                    VER MÍDIA KIT DICAS DO FERNANDO 2026
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-24 relative bg-ob-gray border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 bg-ob-orange/10 border border-ob-orange/20 px-4 py-1 rounded-full mb-6">
+                    <i data-lucide="heart-handshake" class="w-4 h-4 text-ob-orange"></i>
+                    <span class="text-ob-orange text-xs font-bold uppercase tracking-widest">NÃO SÓ PAREDES, LEVANTAMOS VIDAS</span>
+                </div>
+
+                <h2 class="font-display text-3xl md:text-5xl uppercase mb-6 text-white">
+                    🛡️ Por que confiar nas<br/>Dicas do Fernando?
+                </h2>
+                <h3 class="text-2xl text-gray-300 font-light italic">"Porque aqui você aprende com quem faz na prática."</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6 text-gray-300 text-lg leading-relaxed text-center">
+                    <p>
+                        Tudo o que ensinamos foi vivido, testado e aprovado no sol, na chuva e na poeira do canteiro de obras.
+                    </p>
+                    <p>
+                        Nosso propósito é claro: <strong class="text-white">tornar a construção civil acessível, segura e digna para qualquer pessoa.</strong>
+                    </p>
+                    <div class="p-6 bg-black/40 border-t-4 border-ob-orange rounded-xl mt-8">
+                        <p class="font-bold text-white uppercase tracking-wider text-sm mb-2">Conclusão:</p>
+                        <p class="italic text-gray-400">"Feito para funcionar na vida real. Não só na teoria."</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <p class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4 text-center">Nosso conteúdo é sustentado por três pilares sólidos:</p>
+                    
+                    <div class="bg-black/30 border border-white/5 p-6 rounded-xl hover:border-ob-orange/50 transition-colors group text-center">
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="bg-green-500/10 p-3 rounded-full text-green-500 group-hover:bg-green-500 group-hover:text-black transition-colors"><i data-lucide="check-circle-2" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold text-xl mb-2">Experiência Real</h4>
+                                <p class="text-gray-400 text-sm">Conhecimento que vem da prática. Cada técnica foi executada em obra de verdade, não em sala de aula.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/30 border border-white/5 p-6 rounded-xl hover:border-ob-orange/50 transition-colors group text-center">
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="bg-green-500/10 p-3 rounded-full text-green-500 group-hover:bg-green-500 group-hover:text-black transition-colors"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold text-xl mb-2">Segurança e Economia</h4>
+                                <p class="text-gray-400 text-sm">Você aprende a fazer certo, evita erros caros e ganha autonomia para resolver problemas sem gastar o que não pode.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/30 border border-white/5 p-6 rounded-xl hover:border-ob-orange/50 transition-colors group text-center">
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="bg-green-500/10 p-3 rounded-full text-green-500 group-hover:bg-green-500 group-hover:text-black transition-colors"><i data-lucide="trending-up" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="text-white font-bold text-xl mb-2">Resultado Comprovado</h4>
+                                <p class="text-gray-400 text-sm">Milhares de pessoas já aplicam nossas dicas no dia a dia. Se o conteúdo gratuito entrega resultado, o método completo eleva o nível.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#050505] pt-16 pb-8 border-t-4 border-ob-orange relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-4 caution-tape opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="mb-10">
+                <h2 class="font-display text-2xl md:text-3xl text-white mb-2 leading-tight">
+                    Mãos que trabalham, mente que planeja e coração que guia.
+                </h2>
+                <p class="text-ob-orange font-bold uppercase tracking-widest text-sm">
+                    Isso é construir com propósito.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider mb-10">
+                <a href="livro.html" class="hover:text-white transition-colors">Livro</a>
+                <span class="text-ob-orange">•</span>
+                <a href="https://www.youtube.com/@DicasdoFernando/playlists" target="_blank" class="hover:text-white transition-colors">Cursos</a>
+                <span class="text-ob-orange">•</span>
+                <a href="fernandoresponde.html" class="hover:text-white transition-colors">IA Fernando</a>
+                <span class="text-ob-orange">•</span>
+                <a href="midiakit.html" class="hover:text-white transition-colors">Contato</a>
+                <span class="text-ob-orange">•</span>
+                <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+            </div>
+
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="https://youtube.com/@DicasdoFernando" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:bg-red-600 hover:border-red-600 transition-all hover:-translate-y-1 group">
+                    <i data-lucide="youtube" class="w-5 h-5"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:bg-pink-600 hover:border-pink-600 transition-all hover:-translate-y-1 group">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="https://facebook.com" target="_blank" class="p-3 bg-white/5 border border-white/10 rounded-full text-white hover:bg-blue-600 hover:border-blue-600 transition-all hover:-translate-y-1 group">
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 w-full max-w-2xl mx-auto">
+                <p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest mb-2">
+                    &copy; 2026 Dicas do Fernando. Todos os direitos reservados.
+                </p>
+                <p class="text-[10px] text-gray-700 font-bold uppercase tracking-widest hover:text-gray-500 cursor-default">
+                    Google
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada (404) | Dicas do Fernando</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-base.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        display: ['Archivo Black', 'sans-serif'],
+                    },
+                    colors: {
+                        'ob-orange': '#FF6B00',
+                        'ob-dark': '#0f0f0f',
+                        'ob-gray': '#1f1f1f',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 15s linear infinite', /* Rotação lenta da engrenagem */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-concrete font-sans text-white h-screen overflow-hidden flex flex-col items-center justify-center relative selection:bg-ob-orange selection:text-black">
+
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        
+        <div class="absolute -top-24 left-1/2 transform -translate-x-1/2 opacity-[0.03]">
+            <i data-lucide="settings" class="w-[500px] h-[500px] text-white animate-spin-slow"></i>
+        </div>
+
+        <div class="absolute top-10 left-10 opacity-[0.05]">
+            <i data-lucide="hammer" class="w-32 h-32 text-white rotate-12"></i>
+        </div>
+        <div class="absolute top-20 right-10 opacity-[0.05]">
+            <i data-lucide="ruler" class="w-24 h-24 text-white -rotate-45"></i>
+        </div>
+        <div class="absolute bottom-10 left-20 opacity-[0.05]">
+            <i data-lucide="hard-hat" class="w-28 h-28 text-white rotate-12"></i>
+        </div>
+        <div class="absolute bottom-20 right-20 opacity-[0.05]">
+            <i data-lucide="wrench" class="w-32 h-32 text-white -rotate-12"></i>
+        </div>
+    </div>
+
+    <div class="relative z-10 text-center px-4 max-w-2xl">
+        
+        <div class="inline-flex justify-center items-center bg-ob-gray border border-white/10 p-6 rounded-full mb-8 shadow-2xl">
+            <i data-lucide="cone" class="w-12 h-12 text-ob-orange"></i>
+        </div>
+
+        <h1 class="font-display text-7xl md:text-9xl text-white mb-4 tracking-tighter leading-none">
+            404
+        </h1>
+
+        <h2 class="font-display text-xl md:text-2xl text-gray-400 mb-6 uppercase tracking-widest">
+            Ops! Falta material aqui.
+        </h2>
+
+        <p class="text-gray-500 text-lg mb-10 leading-relaxed font-light">
+            A página que você procura ainda está na planta ou foi demolida. <br>
+            Não se preocupe, a fundação do site continua firme.
+        </p>
+
+        <a href="index.html" class="group inline-flex items-center gap-3 bg-ob-orange text-black font-black text-sm md:text-base px-8 py-4 rounded hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,107,0,0.3)] uppercase tracking-wide">
+            <i data-lucide="arrow-left" class="w-5 h-5 group-hover:-translate-x-1 transition-transform"></i>
+            Voltar ao Início
+        </a>
+    </div>
+
+    <div class="absolute bottom-6 w-full text-center opacity-30">
+        <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+            System_Error: Obra_Parada // Dicas do Fernando
+        </p>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
