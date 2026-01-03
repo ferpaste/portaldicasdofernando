@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mídia Kit 2026 | Dicas do Fernando</title>
+    <meta name="description" content="Mídia Kit oficial Dicas do Fernando 2026. Estatísticas, perfil de audiência e oportunidades de parceria com o maior influenciador de construção civil.">
+    
+    <!-- Tailwind CSS (CDN Otimizado) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Importação do CSS Externo -->
+    <link rel="stylesheet" href="style-base.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Configuração do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased selection:bg-orange-500 selection:text-white">
+
+    <!-- HEADER (Igual ao Index) -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md shadow-lg border-b border-slate-800 transition-transform duration-300 ease-in-out will-change-transform">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center gap-3 flex-shrink-0 group">
+                    <div class="relative transform group-hover:scale-105 transition-transform duration-300">
+                        <img 
+                            src="logo.jpg" 
+                            alt="Logo" 
+                            class="h-12 w-auto bg-white rounded-lg p-1.5 shadow-md object-contain"
+                            onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'hard-hat\' class=\'w-8 h-8 text-orange-500\'></i>';"
+                        >
+                    </div>
+                    <span class="text-lg md:text-xl font-black text-white tracking-tighter leading-none whitespace-nowrap">
+                        Dicas do<br/>Fernando
+                    </span>
+                </a>
+
+                <!-- Menu Central -->
+                <nav class="hidden lg:flex space-x-1 items-center">
+                    <a href="index.html" class="text-slate-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-lg font-bold text-xs tracking-wide uppercase transition-all duration-200">Início</a>
+                    <a href="livro.html" class="text-slate-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-lg font-bold text-xs tracking-wide uppercase transition-all duration-200">O Livro</a>
+                    <a href="#estatisticas" class="text-white bg-white/10 px-3 py-2 rounded-lg font-bold text-xs tracking-wide uppercase transition-all duration-200">Mídia Kit</a>
+                    <a href="#contato" class="text-slate-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-lg font-bold text-xs tracking-wide uppercase transition-all duration-200">Contato</a>
+                </nav>
+
+                <!-- Botão Mobile -->
+                <button id="menu-btn" class="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav -->
+        <nav id="mobile-menu" class="hidden lg:hidden bg-slate-900 border-t border-slate-800 px-4 py-4 space-y-2">
+            <a href="index.html" class="mobile-link block text-white font-bold text-lg py-3 border-b border-slate-700">Início</a>
+            <a href="livro.html" class="mobile-link block text-white font-bold text-lg py-3 border-b border-slate-700">O Livro</a>
+            <a href="#" class="mobile-link block text-orange-500 font-bold text-lg py-3 border-b border-slate-700">Mídia Kit</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION: DOWNLOAD -->
+        <section class="relative bg-slate-900 text-white py-20 md:py-32 overflow-hidden">
+            <div class="absolute inset-0 bg-blueprint opacity-5 pointer-events-none"></div>
+            <!-- Gradiente de fundo -->
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-orange-400 text-xs font-bold uppercase tracking-widest mb-8 animate-fade-in-up">
+                    <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                    Dados Oficiais 2026
+                </div>
+
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight animate-fade-in-up" style="animation-delay: 100ms;">
+                    MÍDIA KIT <span class="text-orange-500">2026</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 200ms;">
+                    Conecte sua marca ao maior ecossistema de construção civil do Brasil. Números reais, propósito e engajamento.
+                </p>
+
+                <!-- BOTÃO DE DOWNLOAD -->
+                <div class="animate-fade-in-up" style="animation-delay: 300ms;">
+                    <a href="MIDIA KIT DICAS DO FERNANDO 2026.pdf" download class="inline-flex items-center justify-center gap-3 bg-white text-slate-900 hover:bg-orange-50 text-lg font-black py-5 px-10 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group border-b-4 border-slate-300 hover:border-orange-500">
+                        <i data-lucide="download" class="w-6 h-6 text-orange-600 group-hover:animate-bounce"></i>
+                        BAIXAR MÍDIA KIT PDF
+                    </a>
+                    <p class="mt-4 text-sm text-slate-500 font-medium">Arquivo PDF • Atualizado em 2026</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SOBRE O FERNANDO -->
+        <section class="py-20 bg-white border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 relative">
+                        <div class="absolute inset-0 bg-orange-100 rounded-full blur-3xl opacity-50 transform -translate-x-10"></div>
+                        <img src="fernando-familia.jpg" alt="Fernando Steenbock" class="relative rounded-2xl shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 border-4 border-white"
+                             onerror="this.src='https://placehold.co/600x600/e2e8f0/64748b?text=Fernando+Steenbock';">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-6">Quem é Fernando?</h2>
+                        <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                            <strong>Fernando Steenbock, 35 anos.</strong> Pai, mestre construtor, escritor e influenciador. Criador do projeto "Dicas do Fernando", ele inspira milhões de pessoas a construir, reformar e fazer manutenção no lar de forma simples e didática.
+                        </p>
+                        <blockquote class="border-l-4 border-orange-500 pl-6 italic text-slate-700 text-xl font-medium mb-8 bg-orange-50 p-4 rounded-r-lg">
+                            "Construir não é só erguer paredes, é levantar sonhos com as próprias mãos."
+                        </blockquote>
+                        <p class="text-slate-600">
+                            Com uma comunicação clara e empática, Fernando transforma o universo técnico da construção em algo acessível, gerando confiança e autonomia para famílias em todo o Brasil.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTATÍSTICAS (NUMBERS) -->
+        <section id="estatisticas" class="py-24 bg-slate-50 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4">Números que Constroem</h2>
+                    <p class="text-slate-500 text-lg">Audiência massiva e engajada em todas as plataformas.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- YOUTUBE -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="bg-red-100 p-3 rounded-2xl"><i data-lucide="youtube" class="w-8 h-8 text-red-600"></i></div>
+                            <span class="bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Vídeo Novo Todo Dia</span>
+                        </div>
+                        <h3 class="text-5xl font-black text-slate-900 mb-2">112M+</h3>
+                        <p class="text-slate-500 font-bold uppercase tracking-wide text-sm mb-6">Visualizações Totais</p>
+                        <div class="border-t border-slate-100 pt-6 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600 font-medium">Inscritos</span>
+                                <span class="font-bold text-slate-900">+643 Mil</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600 font-medium">Vídeos Publicados</span>
+                                <span class="font-bold text-slate-900">+322</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INSTAGRAM -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="bg-pink-100 p-3 rounded-2xl"><i data-lucide="instagram" class="w-8 h-8 text-pink-600"></i></div>
+                            <span class="bg-pink-50 text-pink-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Alto Engajamento</span>
+                        </div>
+                        <h3 class="text-5xl font-black text-slate-900 mb-2">40M+</h3>
+                        <p class="text-slate-500 font-bold uppercase tracking-wide text-sm mb-6">Visualizações Mensais</p>
+                        <div class="border-t border-slate-100 pt-6 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600 font-medium">Seguidores</span>
+                                <span class="font-bold text-slate-900">250 Mil</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600 font-medium">Interações (Mês)</span>
+                                <span class="font-bold text-slate-900">+150 Mil</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FACEBOOK -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="bg-blue-100 p-3 rounded-2xl"><i data-lucide="facebook" class="w-8 h-8 text-blue-600"></i></div>
+                            <span class="bg-blue-50 text-blue-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Comunidade Fiel</span>
+                        </div>
+                        <h3 class="text-5xl font-black text-slate-900 mb-2">13M+</h3>
+                        <p class="text-slate-500 font-bold uppercase tracking-wide text-sm mb-6">Alcance Mensal</p>
+                        <div class="border-t border-slate-100 pt-6 space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600 font-medium">Seguidores</span>
+                                <span class="font-bold text-slate-900">680 Mil</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600 font-medium">Engajamento (Mês)</span>
+                                <span class="font-bold text-slate-900">+600 Mil</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Perfil Demográfico -->
+                <div class="mt-16 bg-slate-900 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[80px]"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+                        <div>
+                            <h3 class="text-2xl font-black mb-6 flex items-center gap-3">
+                                <i data-lucide="users" class="text-orange-500"></i> Perfil da Audiência
+                            </h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between text-sm font-bold mb-2">
+                                        <span>Mulheres</span>
+                                        <span class="text-orange-400">51.10%</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-orange-500 w-[51.10%]"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm font-bold mb-2">
+                                        <span>Homens</span>
+                                        <span class="text-blue-400">48.90%</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-blue-500 w-[48.90%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                            <h4 class="font-bold text-slate-300 mb-4 uppercase text-sm tracking-widest">Top Cidades</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex justify-between border-b border-slate-700 pb-2"><span>🇧🇷 São Paulo, SP</span> <span class="font-bold">22.2k</span></li>
+                                <li class="flex justify-between border-b border-slate-700 pb-2"><span>🇦🇴 Luanda, Angola</span> <span class="font-bold">21.4k</span></li>
+                                <li class="flex justify-between border-b border-slate-700 pb-2"><span>🇧🇷 Rio de Janeiro, RJ</span> <span class="font-bold">16.3k</span></li>
+                                <li class="flex justify-between pt-1"><span>🇧🇷 Curitiba, PR</span> <span class="font-bold">5.4k</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARCEIROS -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-black text-slate-900 mb-6">Parceiros de Peso</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto mb-16 text-lg">
+                    Grandes marcas confiam no Dicas do Fernando para gerar autoridade e conexão real com o público.
+                </p>
+
+                <div class="flex flex-wrap justify-center items-center gap-12 grayscale hover:grayscale-0 transition-all duration-500 opacity-70 hover:opacity-100">
+                    <div class="text-2xl font-black text-slate-400 hover:text-blue-800">VOTORANTIM</div>
+                    <div class="text-2xl font-black text-slate-400 hover:text-blue-600">IRWIN</div>
+                    <div class="text-2xl font-black text-slate-400 hover:text-red-600">CASSOL</div>
+                    <div class="text-2xl font-black text-slate-400 hover:text-blue-500">GETNINJAS</div>
+                    <div class="text-2xl font-black text-slate-400 hover:text-orange-600">JUNTOS SOMOS+</div>
+                    <div class="text-2xl font-black text-slate-400 hover:text-yellow-600">MARLUVAS</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTATO -->
+        <section id="contato" class="py-24 bg-slate-900 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-blueprint opacity-5"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-orange-600 rounded-2xl mb-8 shadow-xl transform rotate-3">
+                    <i data-lucide="mail" class="w-8 h-8 text-white"></i>
+                </div>
+                
+                <h2 class="text-4xl md:text-5xl font-black mb-6">Vamos Construir o Futuro Juntos?</h2>
+                <p class="text-xl text-slate-400 mb-12">
+                    Além de espaços publicitários, buscamos parcerias de longo prazo baseadas em confiança e propósito.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <a href="mailto:DicasdoFernando_contato@hotmail.com" class="bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-orange-600 hover:border-orange-500 transition-all group text-left">
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-orange-200 uppercase mb-2">E-mail Comercial</p>
+                        <p class="font-bold text-lg break-all">DicasdoFernando_contato@hotmail.com</p>
+                    </a>
+                    
+                    <a href="https://wa.me/5541998340736" target="_blank" class="bg-white/5 border border-white/10 p-6 rounded-2xl hover:bg-green-600 hover:border-green-500 transition-all group text-left">
+                        <p class="text-xs font-bold text-slate-400 group-hover:text-green-200 uppercase mb-2">WhatsApp / Telefone</p>
+                        <p class="font-bold text-lg">(41) 99834-0736</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-500 py-12 border-t border-slate-900 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-4 opacity-50">
+                 <img 
+                    src="logo.jpg" 
+                    alt="Logo Footer" 
+                    class="h-8 w-auto grayscale opacity-50"
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='<i data-lucide=\'hard-hat\' class=\'w-6 h-6\'></i>';"
+                >
+            </div>
+            <p class="text-sm">&copy; 2026 Dicas do Fernando. Todos os direitos reservados.</p>
+            <a href="index.html" class="text-orange-600 hover:text-orange-500 font-bold transition-colors mt-6 inline-block text-sm">Voltar para o Portal</a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="menu.js"></script>
+    <script src="scroll-spy.js"></script>
+    <script src="header-scroll.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
