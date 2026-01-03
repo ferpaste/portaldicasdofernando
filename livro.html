@@ -46,16 +46,16 @@
     </script>
 
     <style>
-        /* Livro 3D Otimizado para Dark Mode */
-        .book-container { perspective: 1200px; }
+        /* Livro 3D Centralizado */
+        .book-container { perspective: 1200px; display: flex; justify-content: center; }
         .book-cover {
-            transform: rotateY(-15deg) rotateX(5deg);
+            transform: rotateY(-10deg) rotateX(5deg);
             transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease;
-            box-shadow: 25px 25px 50px rgba(0,0,0,0.6); /* Sombra mais escura */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
         .book-container:hover .book-cover {
             transform: rotateY(0deg) rotateX(0deg) scale(1.02);
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.3); /* Glow Laranja no Hover */
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.4);
         }
         
         /* Scrollbar escondida para o chat */
@@ -79,7 +79,6 @@
 
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 pt-3 px-2 md:px-4">
         <div class="glass-panel rounded-xl max-w-7xl mx-auto flex justify-between items-center h-20 px-6 shadow-2xl">
-            
             <a href="index.html" class="flex items-center gap-3 group">
                 <div class="bg-ob-orange p-2 rounded-lg transform group-hover:rotate-12 transition-transform shadow-[0_0_15px_rgba(255,107,0,0.5)]">
                     <i data-lucide="hard-hat" class="w-7 h-7 text-black fill-current"></i>
@@ -89,19 +88,16 @@
                     <span class="block font-display text-2xl text-ob-orange tracking-tighter -mt-1">FERNANDO</span>
                 </div>
             </a>
-
             <nav class="hidden md:flex gap-6 font-bold text-sm tracking-widest uppercase items-center">
                 <a href="index.html" class="hover:text-ob-orange transition-colors">Início</a>
                 <a href="#conteudo" class="hover:text-ob-orange transition-colors">Conteúdo</a>
                 <a href="fernandoresponde.html" class="hover:text-white transition-colors">IA Mestre</a>
                 <a href="midiakit.html" class="hover:text-white transition-colors">Parcerias</a>
             </nav>
-
             <a href="#precos" class="hidden md:flex bg-white/10 border border-ob-orange/50 text-white hover:bg-ob-orange hover:text-black font-black text-xs py-3 px-6 rounded shadow-lg transition-all items-center gap-2 uppercase tracking-wide transform hover:-translate-y-1">
                 GARANTA O SEU
                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
-
             <button id="menu-btn" class="md:hidden text-white hover:text-ob-orange transition-colors">
                 <i data-lucide="menu" class="w-8 h-8"></i>
             </button>
@@ -109,9 +105,7 @@
     </header>
 
     <div id="mobile-menu" class="hidden fixed inset-0 z-[60] bg-black/95 flex flex-col items-center justify-center gap-8 text-2xl font-black uppercase text-white backdrop-blur-xl transition-all">
-        <button id="close-menu-btn" class="absolute top-8 right-8 text-ob-orange">
-            <i data-lucide="x" class="w-10 h-10"></i>
-        </button>
+        <button id="close-menu-btn" class="absolute top-8 right-8 text-ob-orange"><i data-lucide="x" class="w-10 h-10"></i></button>
         <a href="index.html" class="mobile-link hover:text-ob-orange">Início</a>
         <a href="#conteudo" class="mobile-link hover:text-ob-orange">Conteúdo</a>
         <a href="fernandoresponde.html" class="mobile-link hover:text-green-400">IA Mestre</a>
@@ -124,236 +118,53 @@
             <img src="fernando-obra-bg.jpg" class="w-full h-full object-cover opacity-30 scale-105 animate-[pulse_10s_infinite]" alt="Canteiro de Obras" onerror="this.style.display='none'">
         </div>
 
-        <div class="relative z-20 max-w-7xl mx-auto px-6 w-full flex flex-col lg:flex-row items-center gap-12">
+        <div class="relative z-20 max-w-5xl mx-auto px-6 w-full flex flex-col items-center text-center">
             
-            <div class="lg:w-1/2 text-center lg:text-left">
-                <div class="flex flex-wrap justify-center lg:justify-start gap-3 mb-8 animate-fade-in-up">
-                    <div class="inline-flex items-center gap-2 border border-ob-orange/30 bg-ob-orange/10 px-4 py-1.5 rounded-full backdrop-blur">
-                        <i data-lucide="trophy" class="w-4 h-4 text-ob-orange"></i>
-                        <span class="text-ob-orange text-xs font-bold uppercase tracking-widest">Autor Best-Seller</span>
-                    </div>
-                    <div class="inline-flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-1.5 rounded-full backdrop-blur">
-                        <i data-lucide="brick-wall" class="w-4 h-4 text-white"></i>
-                        <span class="text-white text-xs font-bold uppercase tracking-widest">Método Comprovado</span>
-                    </div>
+            <div class="flex flex-wrap justify-center gap-3 mb-8 animate-fade-in-up">
+                <div class="inline-flex items-center gap-2 border border-ob-orange/30 bg-ob-orange/10 px-4 py-1.5 rounded-full backdrop-blur">
+                    <i data-lucide="trophy" class="w-4 h-4 text-ob-orange"></i>
+                    <span class="text-ob-orange text-xs font-bold uppercase tracking-widest">Autor que democratizou a construção</span>
                 </div>
-
-                <h1 class="font-display text-5xl md:text-6xl lg:text-7xl leading-none mb-6 text-white drop-shadow-2xl animate-fade-in-up" style="animation-delay: 100ms;">
-                    LIVRO-FERRAMENTA<br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-ob-orange to-yellow-500">Construindo com Propósito</span>
-                </h1>
-                
-                <p class="text-xl text-gray-300 font-light italic border-l-4 border-ob-orange pl-6 py-2 mb-8 animate-fade-in-up bg-black/40 rounded-r-lg" style="animation-delay: 200ms;">
-                    "O primeiro livro que não serve para a estante. Serve para a obra."
-                </p>
-
-                <p class="text-lg text-gray-400 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 animate-fade-in-up" style="animation-delay: 300ms;">
-                    Do tijolo ao acabamento, tenha o guia definitivo para construir, reformar e economizar de verdade. Risque, suje e use.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center animate-fade-in-up" style="animation-delay: 400ms;">
-                    <a href="#precos" class="bg-ob-orange text-black font-black text-lg px-8 py-4 rounded hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,107,0,0.4)] flex items-center justify-center gap-2 group w-full sm:w-auto uppercase">
-                        <i data-lucide="shopping-cart" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-                        Quero meu Livro
-                    </a>
-                    <a href="#detalhes" class="border border-white/20 bg-white/5 text-white font-bold text-lg px-8 py-4 rounded hover:bg-white/10 backdrop-blur transition-all flex items-center justify-center gap-2 group w-full sm:w-auto">
-                        <i data-lucide="eye" class="w-5 h-5 group-hover:text-ob-orange transition-colors"></i>
-                        Ver por dentro
-                    </a>
+                <div class="inline-flex items-center gap-2 border border-white/10 bg-white/5 px-4 py-1.5 rounded-full backdrop-blur">
+                    <i data-lucide="brick-wall" class="w-4 h-4 text-white"></i>
+                    <span class="text-white text-xs font-bold uppercase tracking-widest">Método Comprovado</span>
                 </div>
             </div>
 
-            <div class="lg:w-1/2 flex justify-center animate-fade-in-up" style="animation-delay: 300ms;">
-                <div class="w-full max-w-[340px] relative z-20">
-                    <div class="relative w-full aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(255,107,0,0.15)] border-4 border-ob-dark bg-black group hover:border-ob-orange transition-colors">
-                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-ob-dark rounded-b-xl z-30"></div>
-                        
-                        <iframe class="w-full h-full rounded-2xl" src="https://www.youtube.com/embed/68u90_wcuwU" title="Trailer do Livro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        
-                        <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
-                            <p class="text-white font-bold text-center text-sm uppercase tracking-wider">Assista ao Trailer</p>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="font-display text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 text-white drop-shadow-2xl animate-fade-in-up" style="animation-delay: 100ms;">
+                Livro Oficial:<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-ob-orange to-yellow-500">Construindo com Propósito</span><br>
+                <span class="text-2xl md:text-4xl text-white block mt-4 font-normal">Livro-Ferramenta Dicas do Fernando</span>
+            </h1>
+            
+            <p class="text-xl text-gray-300 font-light italic border-l-4 border-ob-orange pl-6 py-2 mb-8 animate-fade-in-up bg-black/40 inline-block rounded-r-lg" style="animation-delay: 200ms;">
+                O <strong>Primeiro Livro-Ferramenta Interativo do Brasil</strong>. Não serve para a estante, serve para a obra. Da Fundação ao acabamento, tenha o guia definitivo para construir, reformar e economizar de verdade.
+            </p>
+
+            <div class="w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,107,0,0.2)] border border-white/10 bg-black mb-10 animate-fade-in-up" style="animation-delay: 300ms;">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/68u90_wcuwU" title="Trailer do Livro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+            
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center animate-fade-in-up w-full" style="animation-delay: 400ms;">
+                <a href="#precos" class="bg-ob-orange text-black font-black text-lg px-10 py-5 rounded hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,107,0,0.4)] flex items-center justify-center gap-2 group w-full sm:w-auto uppercase">
+                    QUERO MEU LIVRO AGORA
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+            
+            <p class="mt-4 text-sm text-gray-400 font-bold uppercase tracking-widest flex items-center justify-center gap-2 animate-pulse-slow">
+                <i data-lucide="star" class="w-4 h-4 text-ob-orange"></i> Lançamento exclusivo com Bônus
+            </p>
 
         </div>
     </section>
 
     <div class="w-full h-8 caution-tape border-y-2 border-black relative z-30"></div>
 
-    <section class="py-24 bg-ob-dark border-y border-white/5 relative">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            
-            <div class="mb-16">
-                <div class="inline-flex justify-center items-center p-4 bg-red-500/10 rounded-full mb-6 border border-red-500/20 shadow-[0_0_30px_rgba(220,38,38,0.15)] animate-pulse-slow">
-                    <i data-lucide="triangle-alert" class="w-8 h-8 text-red-500"></i>
-                </div>
-                <h2 class="font-display text-3xl md:text-5xl text-white mb-6">
-                    CANSADO DE <span class="text-ob-orange decoration-wavy underline decoration-ob-orange/30">RASGAR DINHEIRO</span> NA OBRA?
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                    Construir sem conhecimento dói no bolso... mas dói muito mais na confiança.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6 mb-12">
-                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-red-500/50 transition-colors group text-left">
-                    <div class="flex items-start gap-5">
-                        <div class="text-3xl mt-1 opacity-80 grayscale group-hover:grayscale-0 transition-all">💸</div>
-                        <div>
-                            <h3 class="font-display text-xl text-white mb-2 group-hover:text-red-400 transition-colors">Orçamento Estourado</h3>
-                            <p class="text-gray-400">O dinheiro acaba e a obra não. O pesadelo de ver as contas chegando sem fim.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-red-500/50 transition-colors group text-left">
-                    <div class="flex items-start gap-5">
-                        <div class="text-3xl mt-1 opacity-80 grayscale group-hover:grayscale-0 transition-all">😡</div>
-                        <div>
-                            <h3 class="font-display text-xl text-white mb-2 group-hover:text-red-400 transition-colors">Dependência Total</h3>
-                            <p class="text-gray-400">Ficar refém da agenda, dos atrasos e da boa vontade de terceiros para tudo.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-red-500/50 transition-colors group text-left">
-                    <div class="flex items-start gap-5">
-                        <div class="text-3xl mt-1 opacity-80 grayscale group-hover:grayscale-0 transition-all">📉</div>
-                        <div>
-                            <h3 class="font-display text-xl text-white mb-2 group-hover:text-red-400 transition-colors">Medo de Errar</h3>
-                            <p class="text-gray-400">Comprar o material errado, desperdiçar e perder dias inteiros de trabalho.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-red-500/50 transition-colors group text-left">
-                    <div class="flex items-start gap-5">
-                        <div class="text-3xl mt-1 opacity-80 grayscale group-hover:grayscale-0 transition-all">🏚️</div>
-                        <div>
-                            <h3 class="font-display text-xl text-white mb-2 group-hover:text-red-400 transition-colors">Insegurança</h3>
-                            <p class="text-gray-400">Olhar para uma parede e não saber se está segura ou se vai apresentar problemas.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-6 bg-black/40 border-t-4 border-ob-orange rounded-xl inline-block max-w-2xl">
-                <p class="text-lg text-gray-300 italic font-medium">
-                    "Eu sei como é. Eu cresci vendo isso. E decidi criar a solução."
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="detalhes" class="py-24 bg-ob-gray border-t border-white/5 relative overflow-hidden">
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-ob-orange/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-                
-                <div class="lg:w-1/2 flex flex-col items-center gap-12 book-container">
-                    
-                    <div class="relative animate-float z-10">
-                        <div class="relative w-64 md:w-80 book-cover cursor-pointer group">
-                            <img src="capa-livro.jpg" alt="Capa do Livro" class="w-full h-auto rounded-r-lg border-l-4 border-white/10 object-cover" onerror="this.src='https://placehold.co/400x600/111/orange?text=CAPA+LIVRO'">
-                            
-                            <div class="absolute -right-8 top-10 bg-ob-orange text-black p-3 rounded-xl shadow-xl flex items-center gap-2 animate-pulse-slow">
-                                <i data-lucide="qr-code" class="w-6 h-6"></i>
-                                <span class="text-xs font-black uppercase">Vídeos Reais</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-[280px] relative z-20">
-                        <div class="relative w-full aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl border-4 border-ob-dark bg-black group hover:border-ob-orange transition-colors">
-                            <iframe class="w-full h-full rounded-2xl" src="https://www.youtube.com/embed/XDkRmTgGDn4" title="Veja por dentro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <p class="text-center text-[10px] text-gray-400 mt-3 font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
-                            <i data-lucide="smartphone" class="w-3 h-3 text-ob-orange"></i> Veja o livro por dentro
-                        </p>
-                    </div>
-                </div>
-
-                <div class="lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-block px-4 py-1.5 bg-ob-orange/10 text-ob-orange rounded-full text-xs font-black uppercase tracking-widest mb-6 border border-ob-orange/20">
-                        Sistema Integrado
-                    </div>
-                    <h2 class="font-display text-4xl md:text-5xl text-white mb-6 leading-tight">
-                        Apresentamos:<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-ob-orange to-yellow-500">"Construindo com Propósito"</span>
-                    </h2>
-                    <p class="text-lg text-gray-300 mb-10 leading-relaxed border-l-4 border-ob-orange pl-6 bg-black/30 p-4 rounded-r-lg">
-                        Esqueça a teoria chata. Este é um sistema de aprendizado prático que une o <strong>papel à tecnologia.</strong>
-                    </p>
-
-                    <ul class="space-y-6 text-left">
-                        <li class="flex items-start gap-4 group">
-                            <div class="bg-black p-3 rounded-xl text-ob-orange border border-white/10 group-hover:bg-ob-orange group-hover:text-black transition-colors">
-                                <i data-lucide="book" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-lg">📘 O Guia Físico</h4>
-                                <p class="text-gray-400 text-sm">Leve para a obra. Suje de poeira. Consulte na hora do aperto sem depender de bateria.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4 group">
-                            <div class="bg-black p-3 rounded-xl text-white border border-white/10 group-hover:bg-white group-hover:text-black transition-colors">
-                                <i data-lucide="scan-line" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-lg">📱 QR Codes Mágicos</h4>
-                                <p class="text-gray-400 text-sm">Travou? Aponte a câmera. O Fernando aparece em vídeo te ensinando o passo a passo exato.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4 group">
-                            <div class="bg-black p-3 rounded-xl text-green-500 border border-white/10 group-hover:bg-green-500 group-hover:text-black transition-colors">
-                                <i data-lucide="bot" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-white text-lg">👷‍♂️💬 Fernando Responde</h4>
-                                <p class="text-gray-400 text-sm">Sua inteligência do mestre para construir, reformar e cuidar do seu lar.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-black border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="font-display text-3xl md:text-5xl text-white mb-16">O QUE VOCÊ VAI APRENDER</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-ob-gray border border-white/10 p-8 rounded-xl hover:border-ob-orange transition-colors group text-center">
-                    <div class="bg-ob-orange/10 p-4 rounded-full inline-block mb-6 group-hover:bg-ob-orange group-hover:text-black transition-colors text-ob-orange border border-ob-orange/20">
-                        <i data-lucide="brick-wall" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-display text-2xl text-white mb-4 uppercase">Construção</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Do gabarito ao telhado. Aprenda a fazer sapatas, baldrame, alvenaria e laje com segurança estrutural.</p>
-                </div>
-                <div class="bg-ob-gray border border-white/10 p-8 rounded-xl hover:border-blue-500 transition-colors group text-center">
-                    <div class="bg-blue-500/10 p-4 rounded-full inline-block mb-6 group-hover:bg-blue-500 group-hover:text-black transition-colors text-blue-500 border border-blue-500/20">
-                        <i data-lucide="hammer" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-display text-2xl text-white mb-4 uppercase">Reforma</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Mude sua casa sem dor de cabeça. Assentamento de pisos, elétrica básica, hidráulica e acabamentos finos.</p>
-                </div>
-                <div class="bg-ob-gray border border-white/10 p-8 rounded-xl hover:border-green-500 transition-colors group text-center">
-                    <div class="bg-green-500/10 p-4 rounded-full inline-block mb-6 group-hover:bg-green-500 group-hover:text-black transition-colors text-green-500 border border-green-500/20">
-                        <i data-lucide="wrench" class="w-8 h-8"></i>
-                    </div>
-                    <h3 class="font-display text-2xl text-white mb-4 uppercase">Manutenção</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">O manual de emergência. Aprenda a resolver vazamentos, trincas e pequenos reparos sozinho.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-ob-dark border-t border-white/5 relative overflow-hidden">
+    <section class="py-24 bg-black border-t border-white/5 relative overflow-hidden text-center">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         
-        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+        <div class="max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center">
             <h2 class="font-display text-3xl md:text-5xl text-white mb-6">MINHA JORNADA</h2>
             <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
                 Muitos veem as obras prontas, mas poucos conhecem o caminho. Do primeiro tijolo ao livro que você vê hoje.
@@ -362,9 +173,9 @@
             <div class="inline-flex flex-col items-center gap-3 mb-12 w-full max-w-md mx-auto bg-ob-gray/50 p-4 rounded-xl border border-white/10 backdrop-blur">
                 <p class="text-xs font-bold text-ob-orange uppercase tracking-widest flex items-center justify-center gap-2 animate-pulse">
                     <i data-lucide="headphones" class="w-4 h-4"></i>
-                    Dê o play para ouvir minha história
+                    Dê o play para sentir a emoção enquanto conhece minha história
                 </p>
-                <div class="flex items-center gap-4 w-full">
+                <div class="flex items-center gap-4 w-full justify-center">
                     <div class="w-10 h-10 bg-ob-orange rounded-full flex items-center justify-center flex-shrink-0 text-black">
                         <i data-lucide="music" class="w-5 h-5"></i>
                     </div>
@@ -380,6 +191,7 @@
                     <div class="min-w-full h-full relative"><img src="fernando-historia-01.jpg" onerror="this.src='https://placehold.co/800x450/111/fff?text=O+Comeco'" class="w-full h-full object-cover"></div>
                     <div class="min-w-full h-full relative"><img src="fernando-historia-02.jpg" onerror="this.src='https://placehold.co/800x450/222/fff?text=Aprendizado'" class="w-full h-full object-cover"></div>
                     <div class="min-w-full h-full relative"><img src="fernando-historia-03.jpg" onerror="this.src='https://placehold.co/800x450/333/fff?text=Superacao'" class="w-full h-full object-cover"></div>
+                    <div class="min-w-full h-full relative"><img src="fernando-historia-04.jpg" onerror="this.src='https://placehold.co/800x450/444/fff?text=O+Livro'" class="w-full h-full object-cover"></div>
                 </div>
                 <div class="absolute bottom-4 right-4 bg-black/70 px-3 py-1 rounded text-[10px] font-bold text-white uppercase tracking-widest border border-white/10">
                     Desliza Automaticamente
@@ -388,138 +200,246 @@
         </div>
     </section>
 
-    <section class="py-24 bg-ob-gray border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+    <section class="py-24 bg-ob-dark border-y border-white/5 relative text-center">
+        <div class="max-w-6xl mx-auto px-6">
             
-            <div class="lg:w-1/2 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-ob-green/10 border border-ob-green/30 rounded-full text-ob-green text-xs font-bold uppercase tracking-widest mb-6">
-                    <span class="w-2 h-2 rounded-full bg-ob-green animate-pulse"></span>
-                    Tecnologia Exclusiva
+            <div class="mb-16">
+                <div class="inline-flex justify-center items-center p-4 bg-yellow-500/10 rounded-full mb-6 border border-yellow-500/20 shadow-[0_0_30px_rgba(234,179,8,0.15)] animate-pulse-slow">
+                    <i data-lucide="triangle-alert" class="w-10 h-10 text-yellow-500"></i>
                 </div>
-                
-                <h2 class="font-display text-4xl md:text-5xl text-white mb-6 leading-none">
-                    FERNANDO RESPONDE <span class="text-3xl align-middle ml-2">👷‍♂️💬</span><br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-ob-green to-blue-500">Sua inteligência do mestre.</span>
+                <h2 class="font-display text-3xl md:text-5xl text-white mb-6">
+                    Você está cansado de <span class="text-ob-orange decoration-wavy underline decoration-ob-orange/30">rasgar dinheiro</span> na obra?
                 </h2>
-                
-                <p class="text-xl text-gray-400 mb-8 font-light">
-                    Construir, reformar e cuidar do seu lar, com um especialista disponível <strong>24h por dia com você.</strong>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    Construir sem conhecimento dói no bolso... mas dói muito mais na confiança. Se você já passou por isso, <strong>este livro é para você:</strong>
                 </p>
-
-                <div class="bg-black/40 p-6 rounded-xl border border-white/10 mb-8">
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300">
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green"></i> Tira dúvidas na hora</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green"></i> Calcula materiais</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green"></i> Dicas de reforma</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green"></i> Socorro em emergências</li>
-                    </ul>
-                </div>
-
-                <a href="fernandoresponde.html" class="inline-flex items-center gap-2 text-ob-green font-bold uppercase tracking-widest hover:text-white transition-colors border-b-2 border-ob-green pb-1">
-                    Conhecer a Ferramenta <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
             </div>
 
-            <div class="lg:w-1/2 w-full max-w-sm mx-auto bg-black border border-white/10 rounded-3xl p-4 shadow-2xl relative">
-                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-ob-gray rounded-b-xl border border-white/10 border-t-0"></div>
-                <div class="h-[400px] bg-ob-gray/50 rounded-2xl overflow-hidden flex flex-col relative">
-                    <div class="p-4 space-y-4">
+            <div class="grid md:grid-cols-2 gap-6 mb-12">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-ob-orange/50 transition-colors group flex flex-col items-center">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">💸</div>
+                    <h3 class="font-display text-xl text-white mb-2 group-hover:text-ob-orange transition-colors">Orçamento Estourado</h3>
+                    <p class="text-gray-400 text-sm">O dinheiro acaba e a obra não. O pesadelo de ver as contas chegando sem fim.</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-ob-orange/50 transition-colors group flex flex-col items-center">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">😡</div>
+                    <h3 class="font-display text-xl text-white mb-2 group-hover:text-ob-orange transition-colors">Dependência Total</h3>
+                    <p class="text-gray-400 text-sm">Ficar refém da agenda, dos atrasos e da boa vontade de terceiros para tudo.</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-ob-orange/50 transition-colors group flex flex-col items-center">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">📉</div>
+                    <h3 class="font-display text-xl text-white mb-2 group-hover:text-ob-orange transition-colors">Medo de Errar</h3>
+                    <p class="text-gray-400 text-sm">Comprar o material errado, desperdiçar e perder dias inteiros de trabalho.</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-ob-orange/50 transition-colors group flex flex-col items-center">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🏚️</div>
+                    <h3 class="font-display text-xl text-white mb-2 group-hover:text-ob-orange transition-colors">Insegurança</h3>
+                    <p class="text-gray-400 text-sm">Olhar para uma parede e não saber se está segura ou se vai apresentar problemas.</p>
+                </div>
+            </div>
+
+            <div class="p-6 bg-black/40 border-t-4 border-ob-orange rounded-xl inline-block max-w-2xl">
+                <p class="text-lg text-gray-300 italic font-medium">
+                    "Eu sei como é. Eu cresci vendo isso. E decidi criar a solução."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="conteudo" class="py-24 bg-ob-gray border-t border-white/5 relative overflow-hidden text-center">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-ob-orange/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center">
+            
+            <div class="inline-block px-4 py-1.5 bg-ob-orange/10 text-ob-orange rounded-full text-xs font-black uppercase tracking-widest mb-6 border border-ob-orange/20">
+                Sistema Integrado
+            </div>
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                Apresentamos:<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-ob-orange to-yellow-500">"Construindo com Propósito"</span>
+            </h2>
+            <p class="text-lg text-gray-300 mb-16 leading-relaxed max-w-2xl mx-auto border-b border-ob-orange/30 pb-6">
+                Esqueça a teoria chata. Este é um sistema de aprendizado prático que une o <strong>papel à tecnologia.</strong>
+            </p>
+
+            <div class="flex flex-col lg:flex-row items-center justify-center gap-16 w-full">
+                
+                <div class="flex flex-col gap-8 lg:w-1/3 order-2 lg:order-1 items-center lg:items-end text-center lg:text-right">
+                    <div class="group">
+                        <div class="bg-ob-dark p-4 rounded-xl inline-block mb-3 border border-white/10 group-hover:border-ob-orange transition-colors">
+                            <i data-lucide="book" class="w-8 h-8 text-white group-hover:text-ob-orange"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-xl">O Guia Físico</h4>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto lg:ml-auto">Leve para a obra. Suje de poeira. Consulte na hora do aperto sem depender de bateria.</p>
+                    </div>
+                    
+                    <div class="group">
+                        <div class="bg-ob-dark p-4 rounded-xl inline-block mb-3 border border-white/10 group-hover:border-ob-orange transition-colors">
+                            <i data-lucide="scan-line" class="w-8 h-8 text-white group-hover:text-ob-orange"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-xl">QR Codes Mágicos</h4>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto lg:ml-auto">Travou? Aponte a câmera. O Fernando aparece em vídeo te ensinando o passo a passo exato.</p>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/3 order-1 lg:order-2 flex flex-col items-center gap-8 book-container">
+                    <div class="relative animate-float z-10">
+                        <div class="relative w-64 md:w-72 book-cover cursor-pointer group">
+                            <img src="capa-livro.jpg" alt="Capa do Livro" class="w-full h-auto rounded-r-lg border-l-4 border-white/10 object-cover" onerror="this.src='https://placehold.co/400x600/111/orange?text=CAPA+LIVRO'">
+                        </div>
+                    </div>
+                    <div class="w-full max-w-[200px] relative z-20">
+                        <div class="relative w-full aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border-2 border-ob-dark bg-black group hover:border-ob-orange transition-colors">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/XDkRmTgGDn4" title="Veja por dentro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <p class="text-center text-[10px] text-gray-400 mt-2 font-bold uppercase tracking-widest">
+                            Veja por dentro
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-8 lg:w-1/3 order-3 items-center lg:items-start text-center lg:text-left">
+                    <div class="group">
+                        <div class="bg-ob-dark p-4 rounded-xl inline-block mb-3 border border-white/10 group-hover:border-green-500 transition-colors">
+                            <i data-lucide="bot" class="w-8 h-8 text-white group-hover:text-green-500"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-xl group-hover:text-green-500 transition-colors">Fernando Responde</h4>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto lg:mr-auto">Sua inteligência do mestre para construir, reformar e cuidar do seu lar. É só perguntar.</p>
+                    </div>
+                    
+                    <div class="group">
+                        <div class="bg-ob-dark p-4 rounded-xl inline-block mb-3 border border-white/10 group-hover:border-ob-orange transition-colors">
+                            <i data-lucide="table-2" class="w-8 h-8 text-white group-hover:text-ob-orange"></i>
+                        </div>
+                        <h4 class="font-bold text-white text-xl">Planilhas Reais</h4>
+                        <p class="text-gray-400 text-sm max-w-xs mx-auto lg:mr-auto">Listas de materiais e orçamentos validados que eu uso nos meus projetos reais.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-ob-dark border-t border-white/5 relative text-center">
+        <div class="max-w-5xl mx-auto px-6 relative z-10 flex flex-col items-center">
+            
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-green-500/10 border border-green-500/30 rounded-full text-green-400 text-xs font-bold uppercase tracking-widest mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Tecnologia Exclusiva
+            </div>
+            
+            <h2 class="font-display text-4xl md:text-5xl text-white mb-6 leading-none">
+                FERNANDO RESPONDE <span class="text-3xl align-middle ml-2">👷‍♂️💬</span><br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">Sua inteligência do mestre de confiança.</span>
+            </h2>
+            
+            <p class="text-xl text-gray-400 mb-10 font-light leading-relaxed max-w-3xl">
+                Construir, reformar e cuidar do seu lar, com um especialista disponível <strong>24h por dia com você.</strong> Não é apenas IA. É a experiência de anos de obra organizada para você.
+            </p>
+
+            <div class="w-full max-w-md bg-black border border-white/10 rounded-3xl p-4 shadow-2xl relative mb-10">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-5 bg-ob-dark rounded-b-xl border border-white/10 border-t-0 z-20"></div>
+                <div class="h-[350px] bg-ob-gray/50 rounded-2xl overflow-hidden flex flex-col relative">
+                    <div class="p-4 space-y-4 text-left">
                         <div class="flex justify-end">
                             <div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none text-xs max-w-[85%]">
                                 Fernando, qual traço de reboco usar?
                             </div>
                         </div>
                         <div class="flex justify-start">
-                            <div class="bg-ob-green/20 text-white p-3 rounded-2xl rounded-tl-none text-xs max-w-[90%] border border-ob-green/30">
-                                <p class="font-bold text-ob-green mb-1">Mestre Fernando:</p>
+                            <div class="bg-green-500/20 text-white p-3 rounded-2xl rounded-tl-none text-xs max-w-[90%] border border-green-500/30">
+                                <p class="font-bold text-green-400 mb-1">Mestre Fernando:</p>
                                 Use 1 lata de cimento para 4 de areia média. Não esqueça do aditivo!
                             </div>
                         </div>
                     </div>
                     <div class="mt-auto p-3 bg-black/80 backdrop-blur border-t border-white/10 flex items-center gap-2">
                         <div class="h-8 bg-white/10 rounded-full w-full"></div>
-                        <div class="w-8 h-8 bg-ob-green rounded-full flex items-center justify-center"><i data-lucide="send" class="w-4 h-4 text-black"></i></div>
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center"><i data-lucide="send" class="w-4 h-4 text-black"></i></div>
                     </div>
                 </div>
             </div>
 
+            </a>
+
         </div>
     </section>
 
-    <section id="precos" class="py-24 bg-ob-dark border-t border-white/5 relative">
-        <div class="max-w-7xl mx-auto px-6 text-center">
+    <section id="precos" class="py-24 bg-ob-gray border-t border-white/5 relative text-center">
+        <div class="max-w-7xl mx-auto px-6">
             <h2 class="font-display text-4xl md:text-6xl text-white mb-4">A OFERTA IRRECUSÁVEL</h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-16">Escolha o plano ideal para a sua obra e comece a economizar hoje mesmo.</p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center justify-center">
                 
-                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-gray-500 transition-all text-center group">
+                <div class="bg-white/5 border border-white/10 p-8 rounded-2xl hover:border-gray-500 transition-all flex flex-col items-center group">
                     <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-2">Opção 1</h3>
                     <h4 class="font-display text-2xl text-white mb-4">BÁSICO</h4>
                     <p class="text-xs text-gray-400 mb-6 bg-white/5 py-1 px-3 rounded inline-block">Apenas Digital</p>
                     <div class="text-4xl font-black text-white mb-8">R$ 39,90</div>
-                    <ul class="space-y-4 mb-8 text-sm text-gray-400 text-left mx-auto max-w-xs">
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green w-4 h-4"></i> E-book PDF Completo</li>
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green w-4 h-4"></i> Leitura em Celular</li>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-400 text-left w-full max-w-xs mx-auto">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> E-book PDF Completo</li>
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> Leitura em Celular</li>
                         <li class="flex items-center gap-3 opacity-30"><i data-lucide="x" class="text-red-500 w-4 h-4"></i> Livro Físico</li>
                     </ul>
                     <a href="#" class="block w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-colors uppercase text-sm">COMPRAR E-BOOK</a>
                 </div>
 
-                <div class="bg-black border-2 border-ob-orange p-8 rounded-2xl shadow-[0_0_40px_rgba(255,107,0,0.15)] relative transform lg:-translate-y-4 text-center">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-ob-orange text-black text-xs font-black uppercase px-6 py-1.5 rounded-full tracking-widest shadow-lg">
+                <div class="bg-black border-2 border-ob-orange p-10 rounded-2xl shadow-[0_0_40px_rgba(255,107,0,0.2)] relative transform scale-105 z-10 flex flex-col items-center">
+                    <div class="absolute -top-4 bg-ob-orange text-black text-xs font-black uppercase px-6 py-1.5 rounded-full tracking-widest shadow-lg">
                         Recomendado
                     </div>
-                    <h3 class="text-sm font-bold text-ob-orange uppercase tracking-widest mb-2 mt-2">Opção 2</h3>
+                    <h3 class="text-sm font-bold text-ob-orange uppercase tracking-widest mb-2 mt-4">Opção 2</h3>
                     <h4 class="font-display text-3xl text-white mb-4">COMBO MESTRE</h4>
                     <p class="text-xs text-black bg-ob-orange/90 mb-6 py-1 px-3 rounded inline-block font-bold">Físico + Digital + Bônus</p>
-                    <div class="flex flex-col mb-8 p-4 bg-white/5 rounded-xl border border-white/10">
+                    <div class="flex flex-col mb-8 p-4 bg-white/5 rounded-xl border border-white/10 w-full">
                         <span class="text-sm text-gray-500 line-through">De R$ 129,00</span>
                         <span class="text-5xl font-black text-white">R$ 99,90</span>
                     </div>
-                    <ul class="space-y-4 mb-8 text-sm text-gray-300 text-left mx-auto max-w-xs font-medium">
+                    <ul class="space-y-4 mb-8 text-sm text-gray-300 text-left w-full max-w-xs mx-auto font-medium">
                         <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-ob-orange w-5 h-5"></i> <strong>Livro Físico</strong> (Em casa)</li>
                         <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-ob-orange w-5 h-5"></i> <strong>E-book Digital</strong> (Imediato)</li>
                         <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-ob-orange w-5 h-5"></i> Vídeos QR Code</li>
                         <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-ob-orange w-5 h-5"></i> Planilhas de Obra</li>
                     </ul>
                     <a href="#" class="block w-full py-5 rounded-xl bg-ob-orange text-black font-black text-lg hover:bg-white transition-all shadow-lg uppercase tracking-wide transform hover:-translate-y-1">QUERO O COMBO</a>
+                    <p class="text-center text-[10px] text-gray-500 mt-4 font-medium uppercase tracking-wide">(Livro físico avulso: R$ 89,90)</p>
                 </div>
 
-                <div class="bg-white/5 border border-ob-green/30 p-8 rounded-2xl hover:border-ob-green transition-all text-center group relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-20 bg-ob-green/5 blur-[50px] rounded-full pointer-events-none"></div>
-                    <h3 class="text-sm font-bold text-ob-green uppercase tracking-widest mb-2">Opção 3</h3>
+                <div class="bg-white/5 border border-green-500/30 p-8 rounded-2xl hover:border-green-500 transition-all flex flex-col items-center group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-20 bg-green-500/5 blur-[50px] rounded-full pointer-events-none"></div>
+                    <h3 class="text-sm font-bold text-green-500 uppercase tracking-widest mb-2">Opção 3</h3>
                     <h4 class="font-display text-2xl text-white mb-4">PROFISSIONAL 🚀</h4>
-                    <p class="text-xs text-ob-green mb-6 bg-ob-green/10 border border-ob-green/20 py-1 px-3 rounded inline-block font-bold">Formação Completa</p>
+                    <p class="text-xs text-green-400 mb-6 bg-green-500/10 border border-green-500/20 py-1 px-3 rounded inline-block font-bold">Formação Completa</p>
                     <div class="text-4xl font-black text-white mb-8">R$ 199,90</div>
-                    <ul class="space-y-4 mb-8 text-sm text-gray-400 text-left mx-auto max-w-xs">
-                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-ob-green w-4 h-4"></i> Tudo do Combo Mestre</li>
-                        <li class="flex items-center gap-3"><i data-lucide="graduation-cap" class="text-ob-green w-4 h-4"></i> <strong>Curso de Pedreiro</strong></li>
-                        <li class="flex items-center gap-3"><i data-lucide="award" class="text-ob-green w-4 h-4"></i> Certificado Profissional</li>
-                        <li class="flex items-center gap-3"><i data-lucide="bot" class="text-ob-green w-4 h-4"></i> Mentoria IA Fernando</li>
+                    <ul class="space-y-4 mb-8 text-sm text-gray-400 text-left w-full max-w-xs mx-auto">
+                        <li class="flex items-center gap-3"><i data-lucide="check" class="text-green-500 w-4 h-4"></i> Tudo do Combo Mestre</li>
+                        <li class="flex items-center gap-3"><i data-lucide="graduation-cap" class="text-green-500 w-4 h-4"></i> <strong>Curso de Pedreiro</strong></li>
+                        <li class="flex items-center gap-3"><i data-lucide="award" class="text-green-500 w-4 h-4"></i> Certificado Profissional</li>
+                        <li class="flex items-center gap-3"><i data-lucide="bot" class="text-green-500 w-4 h-4"></i> Mentoria IA Fernando</li>
                     </ul>
-                    <a href="#" class="block w-full py-4 rounded-xl bg-ob-green text-black font-bold hover:bg-white transition-colors uppercase text-sm shadow-lg shadow-ob-green/20">QUERO SER PROFISSIONAL</a>
+                    <a href="#" class="block w-full py-4 rounded-xl bg-green-600 text-white font-bold hover:bg-green-500 transition-colors uppercase text-sm shadow-lg shadow-green-900/30">QUERO SER PROFISSIONAL</a>
                 </div>
 
             </div>
 
-            <div class="mt-16 max-w-3xl mx-auto bg-ob-green/5 border border-ob-green/20 rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
-                <div class="w-20 h-20 bg-ob-green/10 rounded-full flex items-center justify-center border-2 border-ob-green flex-shrink-0 animate-pulse-slow">
-                    <span class="text-2xl font-black text-ob-green">7</span>
+            <div class="mt-16 max-w-3xl mx-auto bg-green-500/5 border border-green-500/20 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-center gap-6 text-center md:text-left">
+                <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center border-2 border-green-500 flex-shrink-0 animate-pulse-slow">
+                    <span class="text-2xl font-black text-green-500">7</span>
                 </div>
                 <div>
                     <h4 class="font-display text-xl text-white uppercase mb-2">Garantia Blindada</h4>
-                    <p class="text-gray-400 text-sm">Risco Zero. Compre, receba o acesso e avalie. Se achar que não é para você, devolvemos 100% do seu dinheiro. <span class="text-ob-green font-bold">Sem letras miúdas.</span></p>
+                    <p class="text-gray-400 text-sm">Risco Zero. Compre, receba o acesso e avalie. Se achar que não é para você, devolvemos 100% do seu dinheiro. <span class="text-green-500 font-bold">Sem letras miúdas.</span></p>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <footer class="bg-[#050505] pt-16 pb-8 border-t-4 border-ob-orange relative overflow-hidden">
+    <footer class="bg-[#050505] pt-16 pb-8 border-t-4 border-ob-orange relative overflow-hidden text-center">
         <div class="absolute top-0 left-0 w-full h-4 caution-tape opacity-20"></div>
 
-        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="mb-10">
                 <h2 class="font-display text-2xl md:text-3xl text-white mb-2 leading-tight">
                     Mãos que trabalham, mente que planeja e coração que guia.
@@ -555,10 +475,10 @@
 
             <div class="border-t border-white/10 pt-8 w-full max-w-2xl mx-auto">
                 <p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest mb-2">
-                    &copy; 2026 Dicas do Fernando. Todos os direitos reservados.
+                    &copy;  Dicas do Fernando® 2026
                 </p>
                 <p class="text-[10px] text-gray-700 font-bold uppercase tracking-widest hover:text-gray-500 cursor-default">
-                    Google
+                    A Luz Produções
                 </p>
             </div>
         </div>
@@ -573,13 +493,10 @@
                 const slides = track.children;
                 let index = 0;
                 const totalSlides = slides.length;
-                
-                const nextSlide = () => {
+                setInterval(() => {
                     index = (index + 1) % totalSlides;
                     track.style.transform = `translateX(-${index * 100}%)`;
-                };
-                
-                setInterval(nextSlide, 4000); // Muda a cada 4 segundos
+                }, 4000);
             }
         });
     </script>
