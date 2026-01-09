@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso | Dicas do Fernando</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-base.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Archivo Black', 'sans-serif'] },
+                    colors: { 'ob-orange': '#FF6B00', 'ob-dark': '#0f0f0f', 'ob-gray': '#1f1f1f' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-concrete font-sans text-white h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-md bg-ob-dark/90 backdrop-blur border border-white/10 p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-2 bg-ob-orange"></div>
+
+        <div class="text-center mb-6">
+            <i data-lucide="hard-hat" class="w-10 h-10 text-ob-orange mx-auto mb-2"></i>
+            <h1 class="font-display text-xl text-white">ÁREA DO ALUNO</h1>
+        </div>
+
+        <div class="flex border-b border-white/10 mb-6">
+            <button onclick="switchTab('login')" id="tab-login" class="flex-1 pb-2 text-ob-orange border-b-2 border-ob-orange font-bold text-sm uppercase transition-all">Entrar</button>
+            <button onclick="switchTab('register')" id="tab-register" class="flex-1 pb-2 text-gray-500 font-bold text-sm uppercase hover:text-white transition-all">Criar Conta</button>
+        </div>
+
+        <form id="authForm" class="space-y-4">
+            <div id="nameField" class="hidden">
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Seu Nome</label>
+                <input type="text" id="name" placeholder="Ex: Fernando Silva" class="w-full bg-black/50 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-ob-orange focus:outline-none">
+            </div>
+
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">E-mail</label>
+                <input type="email" id="email" required placeholder="seu@email.com" class="w-full bg-black/50 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-ob-orange focus:outline-none">
+            </div>
+
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Senha</label>
+                <input type="password" id="password" required placeholder="******" class="w-full bg-black/50 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-ob-orange focus:outline-none">
+            </div>
+
+            <button type="submit" id="submitBtn" class="w-full bg-ob-orange text-black font-black uppercase tracking-wide py-4 rounded-lg hover:bg-white transition-all transform hover:-translate-y-1 shadow-lg mt-4">
+                ACESSAR PAINEL
+            </button>
+        </form>
+        
+        <div class="mt-6 text-center border-t border-white/5 pt-4">
+            <a href="admin.html" class="text-[10px] text-gray-600 hover:text-white transition-colors underline">Área do Administrador</a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        let currentMode = 'login';
+
+        function switchTab(mode) {
+            currentMode = mode;
+            const nameField = document.getElementById('nameField');
+            const submitBtn = document.getElementById('submitBtn');
+            const tabLogin = document.getElementById('tab-login');
+            const tabRegister = document.getElementById('tab-register');
+
+            if (mode === 'register') {
+                nameField.classList.remove('hidden');
+                submitBtn.innerText = "CRIAR CONTA";
+                tabRegister.classList.add('text-ob-orange', 'border-b-2', 'border-ob-orange');
+                tabRegister.classList.remove('text-gray-500');
+                tabLogin.classList.remove('text-ob-orange', 'border-b-2', 'border-ob-orange');
+                tabLogin.classList.add('text-gray-500');
+            } else {
+                nameField.classList.add('hidden');
+                submitBtn.innerText = "ACESSAR PAINEL";
+                tabLogin.classList.add('text-ob-orange', 'border-b-2', 'border-ob-orange');
+                tabLogin.classList.remove('text-gray-500');
+                tabRegister.classList.remove('text-ob-orange', 'border-b-2', 'border-ob-orange');
+                tabRegister.classList.add('text-gray-500');
+            }
+        }
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.toLowerCase();
+            const password = document.getElementById('password').value;
+            const users = JSON.parse(localStorage.getItem('usersDB')) || {};
+
+            if (currentMode === 'register') {
+                // Lógica de Cadastro
+                const name = document.getElementById('name').value;
+                if(users[email]) {
+                    alert("E-mail já cadastrado!");
+                    return;
+                }
+                users[email] = {
+                    name: name,
+                    email: email,
+                    password: password,
+                    pdfUnlocked: false,
+                    physicalUnlocked: false,
+                    courseUnlocked: false,
+                    trackingCode: ""
+                };
+                localStorage.setItem('usersDB', JSON.stringify(users));
+                localStorage.setItem('currentUser', email);
+                alert("Conta criada com sucesso!");
+                window.location.href = 'dashboard.html';
+
+            } else {
+                // Lógica de Login
+                if (users[email] && users[email].password === password) {
+                    localStorage.setItem('currentUser', email);
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert("E-mail ou senha incorretos.");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

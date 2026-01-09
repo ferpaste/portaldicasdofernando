@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Aluno | Dicas do Fernando</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-base.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Archivo Black', 'sans-serif'] },
+                    colors: { 'ob-orange': '#FF6B00', 'ob-dark': '#0f0f0f', 'ob-gray': '#1f1f1f', 'ob-green': '#22c55e' }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .locked-item { filter: grayscale(100%); opacity: 0.5; pointer-events: none; }
+        .locked-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 50; display: flex; align-items: center; justify-content: center; border-radius: 1rem; }
+    </style>
+</head>
+<body class="bg-concrete font-sans text-white h-screen flex flex-col md:flex-row overflow-hidden selection:bg-ob-orange selection:text-black">
+
+    <aside class="w-full md:w-64 bg-black border-r border-white/10 flex flex-col h-auto md:h-full z-20">
+        <div class="p-6 border-b border-white/10 flex items-center gap-3">
+            <div class="bg-ob-orange p-1.5 rounded"><i data-lucide="hard-hat" class="w-6 h-6 text-black"></i></div>
+            <span class="font-display text-xl leading-none">PAINEL<br><span class="text-ob-orange">DO MESTRE</span></span>
+        </div>
+        <nav class="flex-1 p-4 space-y-2">
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-ob-orange text-black font-bold">
+                <i data-lucide="package" class="w-5 h-5"></i> Meus Produtos
+            </button>
+            <a href="fernandoresponde.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white transition-all">
+                <i data-lucide="bot" class="w-5 h-5"></i> IA Mestre
+            </a>
+        </nav>
+        <div class="p-4 border-t border-white/10">
+            <a href="login.html" class="flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-500/10 rounded-lg transition-all font-bold">
+                <i data-lucide="log-out" class="w-5 h-5"></i> Sair
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-6 md:p-10 relative">
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="font-display text-3xl md:text-4xl text-white">Olá, <span id="userNameDisplay" class="text-ob-orange">Aluno</span>!</h1>
+                <p class="text-gray-400 text-sm">Acompanhe a liberação dos seus materiais abaixo.</p>
+            </div>
+        </header>
+
+        <div class="max-w-5xl mx-auto space-y-6">
+
+            <div id="card-pdf" class="bg-ob-dark border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center relative transition-all">
+                <div id="lock-pdf" class="locked-overlay">
+                    <div class="bg-black px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
+                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i> <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Aprovação</span>
+                    </div>
+                </div>
+                
+                <div id="status-pdf" class="absolute top-4 right-4 hidden"></div>
+
+                <div class="w-24 h-24 bg-gray-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="file-text" class="w-10 h-10 text-white"></i>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="font-display text-xl text-white">Livro PDF Oficial</h3>
+                    <p class="text-gray-400 text-sm mb-4">Arquivo digital completo para download.</p>
+                    <a href="#" id="btn-pdf" class="w-full md:w-auto bg-gray-600 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center gap-2 cursor-not-allowed">
+                        Aguardando...
+                    </a>
+                </div>
+            </div>
+
+            <div id="card-physical" class="bg-ob-dark border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center relative transition-all">
+                <div id="lock-physical" class="locked-overlay">
+                    <div class="bg-black px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
+                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i> <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Envio</span>
+                    </div>
+                </div>
+                
+                <div id="status-physical" class="absolute top-4 right-4 hidden"></div>
+
+                <div class="w-24 h-24 bg-ob-orange/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-ob-orange/30">
+                    <i data-lucide="book" class="w-10 h-10 text-ob-orange"></i>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="font-display text-xl text-white">Livro Físico + Bônus</h3>
+                    <p class="text-gray-400 text-sm mb-4">Status de envio e rastreamento.</p>
+                    <div class="bg-black/40 p-3 rounded-lg border border-white/5 inline-block w-full md:w-auto">
+                        <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Rastreio:</span>
+                        <span id="tracking-code" class="font-mono text-white font-bold text-lg tracking-wider">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="card-course" class="bg-ob-dark border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center relative transition-all">
+                <div id="lock-course" class="locked-overlay">
+                    <div class="bg-black px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
+                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i> <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Acesso</span>
+                    </div>
+                </div>
+
+                <div id="status-course" class="absolute top-4 right-4 hidden"></div>
+
+                <div class="w-24 h-24 bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-500/30">
+                    <i data-lucide="graduation-cap" class="w-10 h-10 text-blue-500"></i>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="font-display text-xl text-white">Curso Mestre de Obras</h3>
+                    <p class="text-gray-400 text-sm mb-4">Acesso à plataforma de aulas.</p>
+                    <a href="#" id="btn-course" class="w-full md:w-auto bg-gray-600 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center gap-2 cursor-not-allowed">
+                        Bloqueado
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. Verificar Autenticação
+        const currentEmail = localStorage.getItem('currentUser');
+        if(!currentEmail) window.location.href = 'login.html';
+
+        // 2. Carregar Dados do Usuário
+        const users = JSON.parse(localStorage.getItem('usersDB')) || {};
+        const user = users[currentEmail];
+
+        if(user) {
+            // Nome
+            document.getElementById('userNameDisplay').innerText = user.name.split(' ')[0];
+
+            // FUNÇÃO PARA APROVAR VISUALMENTE
+            function approveItem(cardId, lockId, statusId, btnId, type) {
+                // Remove o cadeado e o efeito cinza
+                document.getElementById(lockId).classList.add('hidden');
+                document.getElementById(cardId).classList.remove('locked-item'); // Remove filtro P&B
+                
+                // Adiciona o selo verde "APROVADO"
+                const statusBadge = document.getElementById(statusId);
+                statusBadge.classList.remove('hidden');
+                statusBadge.innerHTML = `
+                    <div class="flex items-center gap-1 bg-green-600/20 text-green-500 px-3 py-1 rounded-full border border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.3)]">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        <span class="text-[10px] font-black uppercase tracking-widest">Aprovado</span>
+                    </div>
+                `;
+
+                // Configura o Botão
+                if(btnId) {
+                    const btn = document.getElementById(btnId);
+                    btn.classList.remove('bg-gray-600', 'cursor-not-allowed');
+                    
+                    if(type === 'pdf') {
+                        btn.classList.add('bg-green-600', 'hover:bg-green-500', 'shadow-lg');
+                        btn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> BAIXAR AGORA';
+                        // *** LINK DIRETO PARA A PASTA RAIZ ***
+                        btn.setAttribute('href', 'livro.pdf'); 
+                        btn.setAttribute('download', 'Livro-Dicas-Fernando.pdf');
+                    } 
+                    else if(type === 'course') {
+                        btn.classList.add('bg-white', 'text-black', 'hover:bg-gray-200');
+                        btn.innerHTML = '<i data-lucide="play-circle" class="w-4 h-4"></i> ACESSAR AULAS';
+                        btn.setAttribute('href', 'https://youtube.com/@DicasdoFernando/playlists');
+                        btn.setAttribute('target', '_blank');
+                    }
+                }
+            }
+
+            // --- LÓGICA DE APROVAÇÃO ---
+
+            // PDF
+            if(user.pdfUnlocked) {
+                approveItem('card-pdf', 'lock-pdf', 'status-pdf', 'btn-pdf', 'pdf');
+            } else {
+                document.getElementById('card-pdf').classList.add('locked-item');
+            }
+
+            // FÍSICO
+            if(user.physicalUnlocked) {
+                approveItem('card-physical', 'lock-physical', 'status-physical', null, null);
+                if(user.trackingCode) {
+                    const trackEl = document.getElementById('tracking-code');
+                    trackEl.innerText = user.trackingCode;
+                    trackEl.classList.add('text-ob-orange');
+                }
+            } else {
+                document.getElementById('card-physical').classList.add('locked-item');
+            }
+
+            // CURSO
+            if(user.courseUnlocked) {
+                approveItem('card-course', 'lock-course', 'status-course', 'btn-course', 'course');
+            } else {
+                document.getElementById('card-course').classList.add('locked-item');
+            }
+            
+            // Recarrega ícones após inserir HTML dinâmico
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>

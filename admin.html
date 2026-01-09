@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Dicas do Fernando</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-base.css">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Archivo Black', 'sans-serif'] }, colors: { 'ob-orange': '#FF6B00', 'ob-dark': '#0f0f0f', 'ob-gray': '#1f1f1f', 'ob-green': '#22c55e' } } } }
+    </script>
+</head>
+<body class="bg-ob-gray font-sans text-white min-h-screen p-6">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-8 bg-ob-dark p-6 rounded-xl border border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="bg-red-600 p-2 rounded"><i data-lucide="settings" class="w-6 h-6 text-white"></i></div>
+                <h1 class="font-display text-2xl">GERENCIAR ALUNOS</h1>
+            </div>
+            <a href="login.html" class="text-sm text-gray-400 hover:text-white">Sair</a>
+        </header>
+
+        <div class="bg-ob-dark border border-white/10 rounded-xl overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-gray-400">
+                    <thead class="bg-black text-white font-display uppercase tracking-wider text-xs">
+                        <tr>
+                            <th class="p-4">Aluno</th>
+                            <th class="p-4 text-center">PDF (Download)</th>
+                            <th class="p-4 text-center">Livro Físico</th>
+                            <th class="p-4 text-center">Rastreio</th>
+                            <th class="p-4 text-center">Curso</th>
+                            <th class="p-4 text-center">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody" class="divide-y divide-white/5">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function renderTable() {
+            const tbody = document.getElementById('userTableBody');
+            const users = JSON.parse(localStorage.getItem('usersDB')) || {};
+            tbody.innerHTML = '';
+
+            if (Object.keys(users).length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center">Nenhum aluno cadastrado. Crie uma conta na tela de login.</td></tr>';
+                return;
+            }
+
+            for (const email in users) {
+                const u = users[email];
+                const row = `
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4">
+                            <div class="font-bold text-white text-base">${u.name || 'Sem nome'}</div>
+                            <div class="text-xs">${u.email}</div>
+                        </td>
+                        
+                        <td class="p-4 text-center">
+                            <button onclick="togglePerm('${email}', 'pdfUnlocked')" class="p-2 rounded w-full flex justify-center gap-2 items-center ${u.pdfUnlocked ? 'bg-green-600 text-white' : 'bg-red-900/30 text-red-500 border border-red-900'}">
+                                <i data-lucide="${u.pdfUnlocked ? 'check-circle' : 'lock'}" class="w-4 h-4"></i>
+                                <span class="text-xs font-bold uppercase">${u.pdfUnlocked ? 'Liberado' : 'Bloqueado'}</span>
+                            </button>
+                        </td>
+
+                        <td class="p-4 text-center">
+                            <button onclick="togglePerm('${email}', 'physicalUnlocked')" class="p-2 rounded w-full flex justify-center gap-2 items-center ${u.physicalUnlocked ? 'bg-green-600 text-white' : 'bg-red-900/30 text-red-500 border border-red-900'}">
+                                <i data-lucide="${u.physicalUnlocked ? 'check-circle' : 'lock'}" class="w-4 h-4"></i>
+                                <span class="text-xs font-bold uppercase">${u.physicalUnlocked ? 'Liberado' : 'Bloqueado'}</span>
+                            </button>
+                        </td>
+
+                        <td class="p-4">
+                            <input type="text" value="${u.trackingCode || ''}" onchange="updateTracking('${email}', this.value)" placeholder="Cód. Rastreio" class="bg-black/50 border border-white/10 rounded px-2 py-1 text-white text-xs w-full focus:border-ob-orange outline-none text-center">
+                        </td>
+
+                        <td class="p-4 text-center">
+                            <button onclick="togglePerm('${email}', 'courseUnlocked')" class="p-2 rounded w-full flex justify-center gap-2 items-center ${u.courseUnlocked ? 'bg-green-600 text-white' : 'bg-red-900/30 text-red-500 border border-red-900'}">
+                                <i data-lucide="${u.courseUnlocked ? 'check-circle' : 'lock'}" class="w-4 h-4"></i>
+                                <span class="text-xs font-bold uppercase">${u.courseUnlocked ? 'Liberado' : 'Bloqueado'}</span>
+                            </button>
+                        </td>
+
+                        <td class="p-4 text-center">
+                            <button onclick="deleteUser('${email}')" class="text-red-500 hover:bg-red-500/10 p-2 rounded"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            }
+            lucide.createIcons();
+        }
+
+        function togglePerm(email, field) {
+            let users = JSON.parse(localStorage.getItem('usersDB'));
+            users[email][field] = !users[email][field];
+            localStorage.setItem('usersDB', JSON.stringify(users));
+            renderTable();
+        }
+
+        function updateTracking(email, code) {
+            let users = JSON.parse(localStorage.getItem('usersDB'));
+            users[email].trackingCode = code;
+            localStorage.setItem('usersDB', JSON.stringify(users));
+        }
+
+        function deleteUser(email) {
+            if(confirm('Excluir este aluno?')) {
+                let users = JSON.parse(localStorage.getItem('usersDB'));
+                delete users[email];
+                localStorage.setItem('usersDB', JSON.stringify(users));
+                renderTable();
+            }
+        }
+
+        renderTable();
+    </script>
+</body>
+</html>
