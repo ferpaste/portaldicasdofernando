@@ -4,191 +4,282 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Aluno | Dicas do Fernando</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style-base.css">
-    
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Roboto', 'sans-serif'], display: ['Archivo Black', 'sans-serif'] },
-                    colors: { 'ob-orange': '#FF6B00', 'ob-dark': '#0f0f0f', 'ob-gray': '#1f1f1f', 'ob-green': '#22c55e' }
+                    colors: { 'ob-orange': '#FF6B00', 'ob-dark': '#0f0f0f', 'ob-gray': '#1f1f1f', 'ob-green': '#22c55e' },
+                    animation: {
+                        'fade-text': 'fadeText 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        fadeText: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
                 }
             }
         }
     </script>
 
     <style>
-        .locked-item { filter: grayscale(100%); opacity: 0.5; pointer-events: none; }
-        .locked-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); z-index: 50; display: flex; align-items: center; justify-content: center; border-radius: 1rem; }
+        /* Estilos de Bloqueio */
+        .locked-item { filter: grayscale(100%); opacity: 0.6; pointer-events: none; transition: all 0.3s ease; }
+        .locked-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); z-index: 50; display: flex; align-items: center; justify-content: center; border-radius: 1rem; backdrop-filter: blur(2px); }
+        
+        /* Input Invisível para Edição */
+        .edit-input { background: transparent; border: none; border-bottom: 2px solid transparent; color: white; width: 100%; text-align: left; }
+        .edit-input:focus { outline: none; border-bottom: 2px solid #FF6B00; }
     </style>
 </head>
 <body class="bg-concrete font-sans text-white h-screen flex flex-col md:flex-row overflow-hidden selection:bg-ob-orange selection:text-black">
 
-    <aside class="w-full md:w-64 bg-black border-r border-white/10 flex flex-col h-auto md:h-full z-20">
-        <div class="p-6 border-b border-white/10 flex items-center gap-3">
-            <div class="bg-ob-orange p-1.5 rounded"><i data-lucide="hard-hat" class="w-6 h-6 text-black"></i></div>
-            <span class="font-display text-xl leading-none">PAINEL<br><span class="text-ob-orange">DO MESTRE</span></span>
+    <aside class="w-full md:w-72 bg-black border-r border-white/10 flex flex-col h-auto md:h-full z-30 shadow-2xl relative">
+        <div class="p-8 border-b border-white/10 flex items-center gap-3">
+            <div class="bg-ob-orange p-2 rounded transform rotate-3"><i data-lucide="trowel" class="w-6 h-6 text-black"></i></div>
+            <div class="leading-none">
+                <span class="block font-display text-sm text-gray-400 tracking-wider">ÁREA DO</span>
+                <span class="block font-display text-2xl text-white tracking-tighter">ALUNO</span>
+            </div>
         </div>
-        <nav class="flex-1 p-4 space-y-2">
-            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-ob-orange text-black font-bold">
-                <i data-lucide="package" class="w-5 h-5"></i> Meus Produtos
+
+        <nav class="flex-1 p-6 space-y-4">
+            <button class="w-full flex items-center gap-4 px-6 py-4 rounded-xl bg-ob-orange text-black font-black shadow-[0_0_20px_rgba(255,107,0,0.2)] hover:scale-105 transition-transform">
+                <i data-lucide="package" class="w-5 h-5"></i> MEUS PRODUTOS
             </button>
-            <a href="fernandoresponde.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:text-white transition-all">
-                <i data-lucide="bot" class="w-5 h-5"></i> IA Mestre
+            
+            <a href="login.html" class="w-full flex items-center gap-4 px-6 py-4 rounded-xl text-gray-500 hover:text-red-500 hover:bg-red-500/10 font-bold transition-all border border-transparent hover:border-red-500/20">
+                <i data-lucide="log-out" class="w-5 h-5"></i> SAIR
             </a>
         </nav>
-        <div class="p-4 border-t border-white/10">
-            <a href="login.html" class="flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-500/10 rounded-lg transition-all font-bold">
-                <i data-lucide="log-out" class="w-5 h-5"></i> Sair
-            </a>
+
+        <div class="p-6 opacity-30 text-[10px] text-center uppercase tracking-widest font-mono">
+            ID: <span id="userIdDisplay">---</span>
         </div>
     </aside>
 
-    <main class="flex-1 overflow-y-auto p-6 md:p-10 relative">
-        <header class="flex justify-between items-center mb-10">
-            <div>
-                <h1 class="font-display text-3xl md:text-4xl text-white">Olá, <span id="userNameDisplay" class="text-ob-orange">Aluno</span>!</h1>
-                <p class="text-gray-400 text-sm">Acompanhe a liberação dos seus materiais abaixo.</p>
+    <main class="flex-1 overflow-y-auto relative flex flex-col">
+        
+        <header class="bg-ob-dark border-b border-white/10 p-8 flex flex-col md:flex-row items-center justify-between gap-6 sticky top-0 z-20 shadow-xl backdrop-blur-md bg-opacity-90">
+            
+            <div class="flex items-center gap-6 w-full md:w-auto">
+                <div class="relative group cursor-pointer">
+                    <div class="w-20 h-20 rounded-full border-2 border-ob-orange p-1 shadow-[0_0_20px_rgba(255,107,0,0.3)]">
+                        <img id="profileImage" src="https://via.placeholder.com/150/1f1f1f/ffffff?text=FOTO" class="w-full h-full rounded-full object-cover bg-gray-800">
+                    </div>
+                    <div class="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i data-lucide="camera" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <input type="file" id="imageUpload" accept="image/png, image/jpeg" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                </div>
+
+                <div class="flex-1">
+                    <p class="text-xs text-ob-orange font-bold uppercase tracking-widest mb-1">Bem-vindo, Mestre</p>
+                    <div class="flex items-center gap-2 group">
+                        <input type="text" id="nameInput" class="font-display text-2xl md:text-3xl bg-transparent text-white border-b border-transparent hover:border-white/20 focus:border-ob-orange focus:outline-none transition-colors w-full md:w-auto" value="Carregando...">
+                        <i data-lucide="pencil" class="w-4 h-4 text-gray-600 group-hover:text-ob-orange opacity-0 group-hover:opacity-100 transition-all cursor-pointer" onclick="document.getElementById('nameInput').focus()"></i>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1" id="saveStatus">Clique no nome para editar • Foto até 5MB</p>
+                </div>
+            </div>
+
+            <div class="hidden md:block text-right opacity-50">
+                <i data-lucide="brick-wall" class="w-8 h-8 text-white ml-auto mb-1"></i>
+                <p class="text-[10px] font-bold uppercase tracking-widest">Painel Oficial</p>
             </div>
         </header>
 
-        <div class="max-w-5xl mx-auto space-y-6">
-
-            <div id="card-pdf" class="bg-ob-dark border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center relative transition-all">
+        <div class="flex-1 p-6 md:p-12 max-w-6xl mx-auto w-full space-y-10">
+            
+            <div id="card-pdf" class="bg-ob-gray border border-white/10 rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center relative transition-all group hover:border-ob-orange/30">
                 <div id="lock-pdf" class="locked-overlay">
-                    <div class="bg-black px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
-                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i> <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Aprovação</span>
+                    <div class="bg-black/80 px-6 py-3 rounded-full border border-white/10 flex items-center gap-3 backdrop-blur">
+                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Pagamento</span>
                     </div>
                 </div>
-                
                 <div id="status-pdf" class="absolute top-4 right-4 hidden"></div>
 
-                <div class="w-24 h-24 bg-gray-800 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="file-text" class="w-10 h-10 text-white"></i>
+                <div class="w-24 h-24 bg-gray-800/50 rounded-2xl flex items-center justify-center flex-shrink-0 border border-white/5">
+                    <i data-lucide="file-text" class="w-10 h-10 text-white opacity-80"></i>
                 </div>
                 <div class="flex-1 text-center md:text-left">
-                    <h3 class="font-display text-xl text-white">Livro PDF Oficial</h3>
-                    <p class="text-gray-400 text-sm mb-4">Arquivo digital completo para download.</p>
-                    <a href="#" id="btn-pdf" class="w-full md:w-auto bg-gray-600 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center gap-2 cursor-not-allowed">
-                        Aguardando...
+                    <div class="inline-block bg-white/10 text-white text-[10px] font-black uppercase px-3 py-1 rounded mb-3">Digital</div>
+                    <h3 class="font-display text-2xl text-white mb-2">Livro PDF Oficial</h3>
+                    <p class="text-gray-400 text-sm mb-6 max-w-lg">O guia completo em alta resolução para baixar e levar no celular para a obra. Acesso imediato após liberação.</p>
+                    <a href="#" id="btn-pdf" class="w-full md:w-auto bg-gray-700 text-gray-400 font-bold py-4 px-8 rounded-xl inline-flex items-center justify-center gap-3 cursor-not-allowed transition-all">
+                        Aguardando Liberação
                     </a>
                 </div>
             </div>
 
-            <div id="card-physical" class="bg-ob-dark border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center relative transition-all">
+            <div id="card-physical" class="bg-ob-gray border border-white/10 rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center relative transition-all group hover:border-ob-orange/30">
                 <div id="lock-physical" class="locked-overlay">
-                    <div class="bg-black px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
-                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i> <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Envio</span>
+                    <div class="bg-black/80 px-6 py-3 rounded-full border border-white/10 flex items-center gap-3 backdrop-blur">
+                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Envio</span>
                     </div>
                 </div>
-                
                 <div id="status-physical" class="absolute top-4 right-4 hidden"></div>
 
-                <div class="w-24 h-24 bg-ob-orange/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-ob-orange/30">
+                <div class="w-24 h-24 bg-ob-orange/10 rounded-2xl flex items-center justify-center flex-shrink-0 border border-ob-orange/20">
                     <i data-lucide="book" class="w-10 h-10 text-ob-orange"></i>
                 </div>
                 <div class="flex-1 text-center md:text-left">
-                    <h3 class="font-display text-xl text-white">Livro Físico + Bônus</h3>
-                    <p class="text-gray-400 text-sm mb-4">Status de envio e rastreamento.</p>
-                    <div class="bg-black/40 p-3 rounded-lg border border-white/5 inline-block w-full md:w-auto">
-                        <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Rastreio:</span>
-                        <span id="tracking-code" class="font-mono text-white font-bold text-lg tracking-wider">---</span>
+                    <div class="inline-block bg-ob-orange text-black text-[10px] font-black uppercase px-3 py-1 rounded mb-3">Recomendado</div>
+                    <h3 class="font-display text-2xl text-white mb-2">Livro Físico + Ferramentas</h3>
+                    <p class="text-gray-400 text-sm mb-6 max-w-lg">A versão impressa que chega na sua casa. Acompanhe aqui o status do envio e o código de rastreio.</p>
+                    <div class="bg-black/30 p-4 rounded-xl border border-white/5 inline-block w-full md:w-auto min-w-[200px]">
+                        <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Status do Rastreio:</span>
+                        <span id="tracking-code" class="font-mono text-white font-bold text-lg tracking-wider">EM SEPARAÇÃO</span>
                     </div>
                 </div>
             </div>
 
-            <div id="card-course" class="bg-ob-dark border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center relative transition-all">
+            <div id="card-course" class="bg-ob-gray border border-white/10 rounded-2xl p-8 flex flex-col md:flex-row gap-8 items-center relative transition-all group hover:border-ob-orange/30">
                 <div id="lock-course" class="locked-overlay">
-                    <div class="bg-black px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
-                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i> <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Acesso</span>
+                    <div class="bg-black/80 px-6 py-3 rounded-full border border-white/10 flex items-center gap-3 backdrop-blur">
+                        <i data-lucide="lock" class="w-5 h-5 text-gray-400"></i>
+                        <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Aguardando Acesso</span>
                     </div>
                 </div>
-
                 <div id="status-course" class="absolute top-4 right-4 hidden"></div>
 
-                <div class="w-24 h-24 bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0 border border-blue-500/30">
+                <div class="w-24 h-24 bg-blue-900/20 rounded-2xl flex items-center justify-center flex-shrink-0 border border-blue-500/20">
                     <i data-lucide="graduation-cap" class="w-10 h-10 text-blue-500"></i>
                 </div>
                 <div class="flex-1 text-center md:text-left">
-                    <h3 class="font-display text-xl text-white">Curso Mestre de Obras</h3>
-                    <p class="text-gray-400 text-sm mb-4">Acesso à plataforma de aulas.</p>
-                    <a href="#" id="btn-course" class="w-full md:w-auto bg-gray-600 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center gap-2 cursor-not-allowed">
+                    <div class="inline-block bg-blue-600 text-white text-[10px] font-black uppercase px-3 py-1 rounded mb-3">Curso Completo</div>
+                    <h3 class="font-display text-2xl text-white mb-2">Formação Mestre de Obras</h3>
+                    <p class="text-gray-400 text-sm mb-6 max-w-lg">Videoaulas passo a passo, certificado profissional e mentoria. Acesso vitalício à plataforma.</p>
+                    <a href="#" id="btn-course" class="w-full md:w-auto bg-gray-700 text-gray-400 font-bold py-4 px-8 rounded-xl inline-flex items-center justify-center gap-3 cursor-not-allowed transition-all">
                         Bloqueado
                     </a>
                 </div>
             </div>
 
         </div>
+
+        <footer class="bg-gradient-to-t from-black via-black/90 to-transparent pt-16 pb-8 border-t border-white/5 mt-auto">
+            <div class="max-w-4xl mx-auto text-center px-6">
+                
+                <div class="h-16 flex items-center justify-center mb-8">
+                    <p id="phrase-carousel" class="text-lg md:text-xl text-gray-300 font-light italic animate-fade-text">
+                        "Um lar começa no coração, antes da fundação"
+                    </p>
+                </div>
+
+                <div class="border-t border-white/10 pt-8 flex flex-col items-center gap-4">
+                    <img src="logodf.png" alt="Logo Dicas do Fernando" class="h-10 w-auto opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                    <p class="text-[10px] text-gray-600 uppercase tracking-widest font-bold">
+                        Construindo sonhos com base firme.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
     </main>
 
     <script>
         lucide.createIcons();
 
-        // 1. Verificar Autenticação
-        const currentEmail = localStorage.getItem('currentUser');
-        if(!currentEmail) window.location.href = 'login.html';
+        // 1. Verificar Login
+        const currentUserEmail = localStorage.getItem('currentUser');
+        if (!currentUserEmail) {
+            window.location.href = 'login.html';
+        }
 
-        // 2. Carregar Dados do Usuário
+        // 2. Carregar Dados
         const users = JSON.parse(localStorage.getItem('usersDB')) || {};
-        const user = users[currentEmail];
+        const user = users[currentUserEmail];
 
-        if(user) {
-            // Nome
-            document.getElementById('userNameDisplay').innerText = user.name.split(' ')[0];
+        if (user) {
+            const nameInput = document.getElementById('nameInput');
+            const profileImage = document.getElementById('profileImage');
+            const saveStatus = document.getElementById('saveStatus');
 
-            // FUNÇÃO PARA APROVAR VISUALMENTE
-            function approveItem(cardId, lockId, statusId, btnId, type) {
-                // Remove o cadeado e o efeito cinza
-                document.getElementById(lockId).classList.add('hidden');
-                document.getElementById(cardId).classList.remove('locked-item'); // Remove filtro P&B
-                
-                // Adiciona o selo verde "APROVADO"
-                const statusBadge = document.getElementById(statusId);
-                statusBadge.classList.remove('hidden');
-                statusBadge.innerHTML = `
-                    <div class="flex items-center gap-1 bg-green-600/20 text-green-500 px-3 py-1 rounded-full border border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.3)]">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i>
-                        <span class="text-[10px] font-black uppercase tracking-widest">Aprovado</span>
-                    </div>
-                `;
+            // Carregar Nome
+            nameInput.value = user.name || "Aluno";
+            document.getElementById('userIdDisplay').innerText = user.email;
 
-                // Configura o Botão
-                if(btnId) {
-                    const btn = document.getElementById(btnId);
-                    btn.classList.remove('bg-gray-600', 'cursor-not-allowed');
-                    
-                    if(type === 'pdf') {
-                        btn.classList.add('bg-green-600', 'hover:bg-green-500', 'shadow-lg');
-                        btn.innerHTML = '<i data-lucide="download" class="w-4 h-4"></i> BAIXAR AGORA';
-                        // *** LINK DIRETO PARA A PASTA RAIZ ***
-                        btn.setAttribute('href', 'livro.pdf'); 
-                        btn.setAttribute('download', 'Livro-Dicas-Fernando.pdf');
-                    } 
-                    else if(type === 'course') {
-                        btn.classList.add('bg-white', 'text-black', 'hover:bg-gray-200');
-                        btn.innerHTML = '<i data-lucide="play-circle" class="w-4 h-4"></i> ACESSAR AULAS';
-                        btn.setAttribute('href', 'https://youtube.com/@DicasdoFernando/playlists');
-                        btn.setAttribute('target', '_blank');
-                    }
-                }
+            // Carregar Foto (se existir)
+            if (user.photo) {
+                profileImage.src = user.photo;
             }
 
-            // --- LÓGICA DE APROVAÇÃO ---
+            // --- LÓGICA DE EDIÇÃO DE PERFIL ---
+            
+            // Salvar Nome ao perder foco
+            nameInput.addEventListener('blur', () => {
+                user.name = nameInput.value;
+                saveUser(user);
+                showSaveStatus("Nome atualizado!");
+            });
 
+            // Upload de Foto
+            document.getElementById('imageUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (file.size > 5 * 1024 * 1024) { // 5MB
+                        alert("A imagem deve ter no máximo 5MB.");
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onloadend = function() {
+                        const base64String = reader.result;
+                        profileImage.src = base64String; // Atualiza visual
+                        user.photo = base64String; // Salva no objeto
+                        
+                        try {
+                            saveUser(user); // Tenta salvar no LocalStorage
+                            showSaveStatus("Foto de perfil atualizada!");
+                        } catch (error) {
+                            alert("Erro: A imagem é muito grande para o navegador salvar. Tente uma menor.");
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            function saveUser(updatedUser) {
+                users[currentUserEmail] = updatedUser;
+                localStorage.setItem('usersDB', JSON.stringify(users));
+            }
+
+            function showSaveStatus(msg) {
+                saveStatus.innerText = msg;
+                saveStatus.classList.add('text-green-500');
+                setTimeout(() => {
+                    saveStatus.innerText = "Clique no nome para editar • Foto até 5MB";
+                    saveStatus.classList.remove('text-green-500');
+                }, 3000);
+            }
+
+            // --- LÓGICA DE PRODUTOS ---
+            checkPermissions(user);
+        }
+
+        function checkPermissions(user) {
             // PDF
-            if(user.pdfUnlocked) {
-                approveItem('card-pdf', 'lock-pdf', 'status-pdf', 'btn-pdf', 'pdf');
+            if (user.pdfUnlocked) {
+                unlockItem('card-pdf', 'lock-pdf', 'status-pdf', 'btn-pdf', 'pdf');
             } else {
                 document.getElementById('card-pdf').classList.add('locked-item');
             }
 
-            // FÍSICO
-            if(user.physicalUnlocked) {
-                approveItem('card-physical', 'lock-physical', 'status-physical', null, null);
-                if(user.trackingCode) {
+            // Físico
+            if (user.physicalUnlocked) {
+                unlockItem('card-physical', 'lock-physical', 'status-physical', null, null);
+                if (user.trackingCode) {
                     const trackEl = document.getElementById('tracking-code');
                     trackEl.innerText = user.trackingCode;
                     trackEl.classList.add('text-ob-orange');
@@ -197,16 +288,73 @@
                 document.getElementById('card-physical').classList.add('locked-item');
             }
 
-            // CURSO
-            if(user.courseUnlocked) {
-                approveItem('card-course', 'lock-course', 'status-course', 'btn-course', 'course');
+            // Curso
+            if (user.courseUnlocked) {
+                unlockItem('card-course', 'lock-course', 'status-course', 'btn-course', 'course');
             } else {
                 document.getElementById('card-course').classList.add('locked-item');
             }
-            
-            // Recarrega ícones após inserir HTML dinâmico
             lucide.createIcons();
         }
+
+        function unlockItem(cardId, lockId, statusId, btnId, type) {
+            document.getElementById(lockId).classList.add('hidden');
+            document.getElementById(cardId).classList.remove('locked-item');
+            
+            const statusBadge = document.getElementById(statusId);
+            statusBadge.classList.remove('hidden');
+            statusBadge.innerHTML = `
+                <div class="flex items-center gap-1 bg-green-500/10 text-green-500 px-3 py-1 rounded-full border border-green-500/20 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span class="text-[10px] font-black uppercase tracking-widest">Acesso Liberado</span>
+                </div>
+            `;
+
+            if (btnId) {
+                const btn = document.getElementById(btnId);
+                btn.classList.remove('bg-gray-700', 'text-gray-400', 'cursor-not-allowed');
+                
+                if (type === 'pdf') {
+                    btn.classList.add('bg-green-600', 'hover:bg-green-500', 'text-white', 'shadow-lg');
+                    btn.innerHTML = '<i data-lucide="download" class="w-5 h-5"></i> BAIXAR AGORA';
+                    btn.setAttribute('href', 'livro.pdf'); // Link para a pasta raiz
+                    btn.setAttribute('download', 'Livro-Dicas-Fernando.pdf');
+                } else if (type === 'course') {
+                    btn.classList.add('bg-white', 'text-black', 'hover:bg-gray-200', 'shadow-lg');
+                    btn.innerHTML = '<i data-lucide="play-circle" class="w-5 h-5"></i> ACESSAR AULAS';
+                    btn.setAttribute('href', 'https://youtube.com/@DicasdoFernando/playlists');
+                    btn.setAttribute('target', '_blank');
+                }
+            }
+        }
+
+        // --- CARROSSEL DE FRASES ---
+        const phrases = [
+            "\"Frases do Fernando do Livro-Ferramenta\"",
+            "\"Um lar começa no coração, antes da fundação\"",
+            "\"Cada tijolo conta uma história\"",
+            "\"Construir é mais do que levantar paredes. É cuidado, é amor\"",
+            "\"Aprender aqui é construir pra vida\"",
+            "\"Você está levantando a base do seu futuro\"",
+            "\"Aqui o conhecimento vira base firme pra você construir sua história\""
+        ];
+        
+        let phraseIndex = 0;
+        const phraseEl = document.getElementById('phrase-carousel');
+
+        setInterval(() => {
+            // Efeito Fade Out
+            phraseEl.style.opacity = 0;
+            phraseEl.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                phraseEl.innerText = phrases[phraseIndex];
+                // Efeito Fade In
+                phraseEl.style.opacity = 1;
+                phraseEl.style.transform = 'translateY(0)';
+            }, 500); // Meio segundo para trocar o texto
+        }, 5000); // 5 Segundos
     </script>
 </body>
 </html>
